@@ -2,18 +2,20 @@
 include('./includes/simple_html_dom.php');
 include('./includes/base.php');
 
-$url = BASE_URL;
-
+$path = "";
 if (isset($_GET)) {
     if (isset($_GET['page']))
-        $url = BASE_URL . "page/" . $_GET['page'] . "/?" . http_build_query($_GET);
+        $path = "page/" . $_GET['page'] . "/?" . http_build_query($_GET);
     else
-        $url = BASE_URL . "?" . http_build_query($_GET);
+        $path = "?" . http_build_query($_GET);
 } else {
-    $url = BASE_URL;
+    $path = "";
 }
 
-$response = getCurlData($url, null);
+
+$response = getCurlData($path, null);
+
+$BASE_URL = getBaseUrl();
 
 if ($response == '') {
     die("Unknown Error Occured!");
@@ -24,7 +26,7 @@ foreach ($mPage->find('article') as $article) {
     $anc = $article->find('a', 1);
     $titleData = explode(' (', $anc->innertext, 2);
     $documents[] = [
-        'uri' => str_replace(BASE_URL, '', $anc->href),
+        'uri' => str_replace($BASE_URL, '', $anc->href),
         'name' => $titleData[0],
         'description' => '(' . $titleData[1],
         'image' => $article->find('img', 0)->src

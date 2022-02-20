@@ -5,7 +5,7 @@ if (!isset($_GET['uri'])) {
     die("Unknown Error Occured!");
 }
 $uri = $_GET['uri'];
-$response = getCurlData(BASE_URL . $uri, null);
+$response = getCurlData($uri, null);
 
 if ($response == '') {
     die("Unknown Error Occured!");
@@ -15,7 +15,8 @@ $mPage = str_get_html($response);
 $params = [];
 foreach ($mPage->find('input[type=hidden]') as $input)
     $params[$input->name] = $input->value;
-$response = getCurlData(BASE_URL . 'start-downloading/', $params);
+$response = getCurlData('start-downloading/', $params);
+$BASE_URL = getBaseUrl();
 $downloadPage = str_get_html($response);
 
 $downloadAnchor = $downloadPage->find('a[onclick=open_win()]', 0);
@@ -91,7 +92,7 @@ $downloadAnchor->innertext = 'Download Now';
 
     <?php
     foreach ($downloadPage->find('img[src^=/screenshot]') as $screenshot) {
-        $screenshot->src = BASE_URL . $screenshot->src;
+        $screenshot->src = $BASE_URL . $screenshot->src;
         echo '<div class="center-div">' . $screenshot->outertext . '</div>';
     }
 
