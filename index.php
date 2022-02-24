@@ -82,25 +82,54 @@ die(); */
 
         .doc-card {
             display: block;
-            background-color: white;
+            background-color: #eef;
             overflow: hidden;
             position: relative;
+            padding-top: 150%;
+
             border: 1px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
         }
 
-        .doc-card header {
+        .doc-card>div {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
             position: absolute;
-            display: none;
+            top: 0;
             bottom: 0;
+            left: 0;
+            transition: 0.2s;
+            right: 0;
         }
 
-        .doc-card img {
+        .doc-card:hover div {
+            filter: blur(2px);
+        }
+
+        .doc-card:hover header {
+            opacity: 1;
+        }
+
+        .doc-card header {
+            position: absolute;
+            bottom: 0;
+            padding: 40px 10px 10px 10px;
+            opacity: 0;
+            color: white;
+            transition: 0.3s;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+            
+            left: 0;
+            right: 0;
+        }
+
+        /* .doc-card img {
             width: 100%;
             margin: 0;
             height: unset;
-        }
+        } */
 
         img.aligncenter {
             width: 100%;
@@ -278,14 +307,20 @@ function getHref($page)
 
 function createDocument(array $data)
 {
-    echo <<<HTML
-    <a href="./download.php?uri={$data['uri']}" class="doc-card">
-        <img src="{$data['image']}" alt="{$data['name']}">
-       <!--  <header>
+?>
+    <a href="./download.php?uri=<?= $data['uri'] ?>" class="">
+        <div class="doc-card">
+            <div style="background-image: url(<?= $data['image'] ?>);"></div>
+            <header>
+                <?= $data['name'] ?>
+            </header>
+        </div>
+        <!-- <img src="{}" alt="{$data['name']}"> -->
+        <!--  <header>
             <h2>{$data['name']}</h2>
             <p>{$data['description']}</p>
         </header> -->
-        
+
     </a>
-    HTML;
+<?php
 }
