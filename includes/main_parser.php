@@ -2,8 +2,15 @@
 require_once(__DIR__ . '/simple_html_dom.php');
 require_once(__DIR__ . '/base.php');
 
-function getDocumentsInPage(string $path):array
+function getDocumentsInPage(int $page = 1, ?string $s = null): array
 {
+    $path = "";
+    if ($s != null)
+        $path .= 'search/' . $s . '/';
+    $path .= "page/" . $page . "/";
+    
+
+        echo $path;
     $response = getCurlData($path, null);
     if ($response == '') {
         die("Unknown Error Occured!");

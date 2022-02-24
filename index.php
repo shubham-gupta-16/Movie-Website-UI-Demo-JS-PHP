@@ -2,19 +2,22 @@
 
 require_once('./includes/main_parser.php');
 
-$path = "";
-if (isset($_GET)) {
-    if (isset($_GET['page']))
-        $path = "page/" . $_GET['page'] . "/?" . http_build_query($_GET);
-    else
-        $path = "?" . http_build_query($_GET);
-} else {
-    $path = "";
-}
+$page = 1;
+if (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0)
+    $page = (int)$_GET['page'];
+
+
+$s = null;
+if (isset($_GET['s']) && strlen($_GET['s']) > 0)
+    $s = $_GET['s'];
+
+
+
+
 
 $BASE_URL = getBaseUrl();
 
-$pageData = getDocumentsInPage($path);
+$pageData = getDocumentsInPage($page, $s);
 
 // die(json_encode($pageData, JSON_PRETTY_PRINT));
 /* header('Content-Type: application/json');
@@ -161,23 +164,26 @@ die(); */
                 createDocument($document);
             ?>
         </div>
-        
+
         <?php
-        /* if ($pageData['pages']>1) {
-            ?>
+        if ($pageData['pages'] > 1) {
+        ?>
             <div class="center-div">
                 <?php
                 for ($i = 1; $i <= $pageData['pages']; $i++) {
-                    ?>
-                    <a href="<?php echo "?page=" . $i . "/" . $path; ?>">
-                        <?php echo $i; ?>
+                    $href = "?page=" . $i;
+                    if ($s != null) 
+                        $href .= "&s=" . $s;
+                ?>
+                    <a href="<?= $href ?>">
+                        <?= $i; ?>
                     </a>
-                    <?php
+                <?php
                 }
                 ?>
             </div>
-            <?php
-        } */
+        <?php
+        }
         ?>
         <center>
             <h4>This website was created for educational purpose. It uses the data of 123MKV. We never promote piracy of copyright content.</h4><span>Developer: Shubham Gupta</span><br><br><br>
