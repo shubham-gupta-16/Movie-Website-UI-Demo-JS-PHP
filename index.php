@@ -1,6 +1,6 @@
 <?php
-include('./includes/simple_html_dom.php');
-include('./includes/base.php');
+
+require_once('./includes/main_parser.php');
 
 $path = "";
 if (isset($_GET)) {
@@ -12,26 +12,11 @@ if (isset($_GET)) {
     $path = "";
 }
 
-
-$response = getCurlData($path, null);
-
 $BASE_URL = getBaseUrl();
 
-if ($response == '') {
-    die("Unknown Error Occured!");
-}
-$mPage = str_get_html($response);
-$documents = [];
-foreach ($mPage->find('article') as $article) {
-    $anc = $article->find('a', 1);
-    $titleData = explode(' (', $anc->innertext, 2);
-    $documents[] = [
-        'uri' => str_replace($BASE_URL, '', $anc->href),
-        'name' => $titleData[0],
-        'description' => '(' . $titleData[1],
-        'image' => $article->find('img', 0)->src
-    ];
-}
+$pageData = getDocumentsInPage($path);
+
+// die(json_encode($pageData, JSON_PRETTY_PRINT));
 /* header('Content-Type: application/json');
 echo json_encode($documents);
 die(); */
@@ -172,10 +157,28 @@ die(); */
         <div class="article-grid">
 
             <?php
-            foreach ($documents as $document)
+            foreach ($pageData['documents'] as $document)
                 createDocument($document);
             ?>
         </div>
+        
+        <?php
+        /* if ($pageData['pages']>1) {
+            ?>
+            <div class="center-div">
+                <?php
+                for ($i = 1; $i <= $pageData['pages']; $i++) {
+                    ?>
+                    <a href="<?php echo "?page=" . $i . "/" . $path; ?>">
+                        <?php echo $i; ?>
+                    </a>
+                    <?php
+                }
+                ?>
+            </div>
+            <?php
+        } */
+        ?>
         <center>
             <h4>This website was created for educational purpose. It uses the data of 123MKV. We never promote piracy of copyright content.</h4><span>Developer: Shubham Gupta</span><br><br><br>
         </center>
