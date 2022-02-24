@@ -104,25 +104,41 @@ die(); */
             right: 0;
         }
 
-        .doc-card:hover div {
+        .doc-card:hover>div {
             filter: blur(2px);
         }
 
-        .doc-card:hover header {
+        .doc-card:hover>header {
             opacity: 1;
         }
 
-        .doc-card header {
+        .doc-card:hover>header>div {
+            transform: translateY(0px);
+        }
+
+        .doc-card>header {
             position: absolute;
             bottom: 0;
-            padding: 40px 10px 10px 10px;
+            padding: 55px 10px 10px 10px;
             opacity: 0;
             color: white;
             transition: 0.3s;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
-            
+
             left: 0;
             right: 0;
+        }
+
+        .doc-card>header>div {
+            transform: translateY(8px);
+            transition: transform 0.5s ;
+        }
+
+        .doc-card>header>.d-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: 0.3s;
+
         }
 
         /* .doc-card img {
@@ -312,7 +328,8 @@ function createDocument(array $data)
         <div class="doc-card">
             <div style="background-image: url(<?= $data['image'] ?>);"></div>
             <header>
-                <?= $data['name'] ?>
+                <div class="d-name"><?= $data['name'] ?></div>
+                <div><?= $data['description'] ?></div>
             </header>
         </div>
         <!-- <img src="{}" alt="{$data['name']}"> -->
