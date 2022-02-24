@@ -23,6 +23,9 @@ function getDocumentsInPage(int $page = 1, ?string $s = null): array
         $pages = (int) $paginations[sizeof($links->find('a')) - 2]->innertext;
         // var_dump($links->children());
     }
+    if ($pages < $page) {
+        $pages = $page;
+    }
 
     $documents = [];
     foreach ($mPage->find('article') as $article) {
@@ -31,7 +34,7 @@ function getDocumentsInPage(int $page = 1, ?string $s = null): array
         $documents[] = [
             'uri' => substr(parse_url($anc->href, PHP_URL_PATH), 1),
             'name' => $titleData[0],
-            'description' => '(' . $titleData[1],
+            'description' => ' $titleData[1],',
             'image' => $article->find('img', 0)->src
         ];
     }

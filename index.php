@@ -141,6 +141,39 @@ die(); */
             color: white;
             cursor: pointer;
         }
+
+        .paginate-div {
+            display: flex;
+            justify-content: center;
+            margin-top: 60px;
+            gap: 10px;
+        }
+
+        .paginate-div>* {
+            display: inline-block;
+            padding: 5px 10px;
+        }
+
+        .paginate-div>a {
+            background-color: #ddeeff;
+            color: #0088ff;
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+
+        .paginate-div>a:hover {
+            background-color: #bbeeff;
+        }
+
+        .paginate-div>a.active {
+            background-color: #aaccff;
+        }
+
+        footer {
+            background-color: #f0f0f0;
+            padding-top: 10px;
+            margin-top: 35px;
+        }
     </style>
 </head>
 
@@ -168,16 +201,53 @@ die(); */
         <?php
         if ($pageData['pages'] > 1) {
         ?>
-            <div class="center-div">
+            <div class="paginate-div">
                 <?php
-                for ($i = 1; $i <= $pageData['pages']; $i++) {
-                    $href = "?page=" . $i;
-                    if ($s != null) 
-                        $href .= "&s=" . $s;
+                if ($page > 1) {
                 ?>
-                    <a href="<?= $href ?>">
+                    <a href="<?= getHref($page - 1) ?>">PREV</a>
+                <?php
+                }
+                ?>
+                <a href="<?= getHref(1) ?>" class="<?php if ($page == 1) echo 'active' ?>">1</a>
+                <?php
+                if ($page > 4) {
+                ?>
+                    <span>...</span>
+                <?php
+                }
+                ?>
+                <?php
+                $row = $pageData['pages'] <= 4 ? $pageData['pages'] : ($page > 4 ? $page : 4);
+                $startPoint = ($page > 4 ? $page - 2 : 2);
+                for ($i = $startPoint; $i <= $row; $i++) {
+                ?>
+                    <a href="<?= getHref($i) ?>" class="<?php if ($page == $i) echo 'active' ?>">
                         <?= $i; ?>
                     </a>
+                <?php
+                }
+                ?>
+                <?php
+                if ($pageData['pages'] > 5 && $page < $pageData['pages'] - 1) {
+                ?>
+                    <span>...</span>
+                <?php
+                }
+                ?>
+                <?php
+                if ($pageData['pages'] > 4 && $page < $pageData['pages']) {
+                ?>
+                    <a href="<?= getHref($pageData['pages']) ?>" class="<?php if ($page == 1) echo 'active' ?>">
+                        <?= $pageData['pages'] ?>
+                    </a>
+                <?php
+                }
+                ?>
+                <?php
+                if ($page < $pageData['pages']) {
+                ?>
+                    <a href="<?= getHref($page + 1) ?>">NEXT</a>
                 <?php
                 }
                 ?>
@@ -185,16 +255,26 @@ die(); */
         <?php
         }
         ?>
+
+    </div>
+    <footer>
         <center>
             <h4>This website was created for educational purpose. It uses the data of 123MKV. We never promote piracy of copyright content.</h4><span>Developer: Shubham Gupta</span><br><br><br>
         </center>
-    </div>
-
+    </footer>
 </body>
 
 </html>
 
 <?php
+
+function getHref($page)
+{
+    global $s;
+    $href = "?page=" . $page;
+    if ($s != null) $href .= "&s=" . $s;
+    return $href;
+}
 
 function createDocument(array $data)
 {
