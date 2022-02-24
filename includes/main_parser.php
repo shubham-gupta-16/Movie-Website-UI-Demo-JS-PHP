@@ -9,8 +9,6 @@ function getDocumentsInPage(int $page = 1, ?string $s = null): array
         $path .= 'search/' . $s . '/';
     $path .= "page/" . $page . "/";
     
-
-        echo $path;
     $response = getCurlData($path, null);
     if ($response == '') {
         die("Unknown Error Occured!");

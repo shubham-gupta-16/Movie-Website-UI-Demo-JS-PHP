@@ -238,7 +238,7 @@ die(); */
                 <?php
                 if ($pageData['pages'] > 4 && $page < $pageData['pages']) {
                 ?>
-                    <a href="<?= getHref($pageData['pages']) ?>" class="<?php if ($page == 1) echo 'active' ?>">
+                    <a href="<?= getHref($pageData['pages']) ?>" class="<?php if ($page == $pageData['pages']) echo 'active' ?>">
                         <?= $pageData['pages'] ?>
                     </a>
                 <?php
