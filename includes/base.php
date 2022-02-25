@@ -2,12 +2,12 @@
 
 function getBaseUrl():string
 {
-    return file_get_contents(".env");
+    return file_get_contents(__DIR__ . "/.env");
 }
 
 function setBaseUrl(string $url)
 {
-    file_put_contents(".env", $url);
+    file_put_contents(__DIR__ . "/.env", $url);
 }
 
 function getCurlData(string $path, ?array $postArr): ?string
