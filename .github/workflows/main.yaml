@@ -17,4 +17,4 @@ jobs:
         server: ${{ secrets.ftp_hostname }}
         username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
-        server-dir: ./dev.we-are.great-site.net/
+        server-dir: ./dev.we-are.great-site.net/htdocs/
