@@ -29,6 +29,8 @@ $BASE_URL = getBaseUrl();
         body {
             margin: 0;
             padding: 0;
+            color: white;
+            background-color: #002233;
             font-family: 'Calibri', sans-serif;
         }
 
@@ -49,14 +51,14 @@ $BASE_URL = getBaseUrl();
 
         .download-btn {
             text-decoration: none;
-            color: white;
+            color: #0099ff;
             padding: 8px 20px;
             outline: none;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             display: inline-block;
-            background-color: #a82711;
+            background-color: #001122;
         }
     </style>
 </head>

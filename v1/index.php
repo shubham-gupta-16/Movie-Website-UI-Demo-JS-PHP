@@ -31,7 +31,7 @@ die(); */
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Page</title>
+    <title>Dev Channel</title>
     <style>
         * {
             box-sizing: border-box;
@@ -44,6 +44,7 @@ die(); */
         body {
             margin: 0;
             padding: 0;
+            background-color: #002233;
             font-family: 'Calibri', sans-serif;
         }
 
@@ -67,26 +68,21 @@ die(); */
 
         .article-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
             grid-gap: 20px;
         }
 
-        @media screen and (max-width: 456px) {
-            .article-grid {
-                grid-gap: 10px;
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
-        }
+
 
         /* article card */
 
         .doc-card {
             display: block;
-            background-color: #eef;
+            background-color: #001122;
             overflow: hidden;
             position: relative;
             padding-top: 150%;
-
+            transition: 0.3s;
             border: 1px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
@@ -100,12 +96,18 @@ die(); */
             top: 0;
             bottom: 0;
             left: 0;
-            transition: 0.2s;
+            transform: scale(1.01);
+            transition: 0.4s;
             right: 0;
         }
 
+        .doc-card:hover {
+            box-shadow: 0 0 25px rgba(50, 180, 255, 0.4);
+        }
+
         .doc-card:hover>div {
-            filter: blur(2px);
+            transform: scale(1.1);
+            /* filter: blur(2px); */
         }
 
         .doc-card:hover>header {
@@ -119,11 +121,11 @@ die(); */
         .doc-card>header {
             position: absolute;
             bottom: 0;
-            padding: 55px 10px 10px 10px;
+            padding: 150px 10px 10px 10px;
             opacity: 0;
             color: white;
             transition: 0.3s;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
 
             left: 0;
             right: 0;
@@ -131,7 +133,7 @@ die(); */
 
         .doc-card>header>div {
             transform: translateY(8px);
-            transition: transform 0.5s ;
+            transition: transform 0.5s;
         }
 
         .doc-card>header>.d-name {
@@ -176,14 +178,17 @@ die(); */
         }
 
         .search-div input[type=text] {
-            border: 2px solid #ccc;
+            border: 2px solid #557788;
+            background-color: #001122;
+            color: white;
             width: 100%;
         }
 
         .search-div input[type=submit] {
-            background-color: #0088ee;
-            border: 2px solid #0088ee;
-            color: white;
+            background-color: #001122;
+            border: none;
+            border: 2px solid #557788;
+            color: #0099ff;
             cursor: pointer;
         }
 
@@ -191,6 +196,7 @@ die(); */
             display: flex;
             justify-content: center;
             margin-top: 60px;
+            color: white;
             gap: 10px;
         }
 
@@ -200,24 +206,43 @@ die(); */
         }
 
         .paginate-div>a {
-            background-color: #ddeeff;
+            background-color: #001122;
             color: #0088ff;
             border-radius: 5px;
             transition: 0.2s;
         }
 
         .paginate-div>a:hover {
-            background-color: #bbeeff;
+            background-color: #000715;
         }
 
         .paginate-div>a.active {
-            background-color: #aaccff;
+            background-color: #000511;
         }
 
         footer {
-            background-color: #f0f0f0;
+            background-color: #001122;
+            color: white;
             padding-top: 10px;
             margin-top: 35px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .article-grid {
+                grid-gap: 10px;
+                grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+            }
+        }
+
+        @media screen and (max-width: 505px) {
+            .article-grid {
+                grid-gap: 10px;
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+
+            .doc-card>header>.d-name {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
