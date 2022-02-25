@@ -19,7 +19,7 @@ function getCurlData(string $path, ?array $postArr): ?string
         return getCurlData($path, $postArr);
     }
     if ($response['code'] != 200) {
-        die("Unknown Error Occured!");
+        return null;
     }
 
     return $response['data'];

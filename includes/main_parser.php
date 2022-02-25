@@ -10,6 +10,8 @@ function getDocumentsInPage(int $page = 1, ?string $s = null): ?array
     $path .= "page/" . $page . "/";
     
     $response = getCurlData($path, null);
+    if ($response == null)
+        return null;
     if ($response == '') {
         return null;
     }
