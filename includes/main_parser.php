@@ -13,6 +13,9 @@ function getDownloadLink(array $credentials)
     }
     $BASE_URL = getBaseUrl();
     $downloadPage = str_get_html($response);
+    if ($downloadPage == null) {
+        return null;
+    }
     $result = [];
     $downloadAnchor = $downloadPage->find('a[onclick=open_win()]', 0);
     $result['url'] = $downloadAnchor->href;
@@ -23,24 +26,6 @@ function getDownloadLink(array $credentials)
     }
     return $result;
 }
-function checkRemoteFile($url)
-{
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    // don't download content
-    curl_setopt($ch, CURLOPT_NOBODY, 1);
-    curl_setopt($ch, CURLOPT_FAILONERROR, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-    $result = curl_exec($ch);
-    curl_close($ch);
-    if ($result !== FALSE) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 
 function getDocumentInfo(string $uri): ?array
 {
@@ -54,6 +39,9 @@ function getDocumentInfo(string $uri): ?array
     $result = array();
 
     $mPage = str_get_html($response);
+    if ($mPage == null) {
+        return null;
+    }
 
     $titleData = getTitleData($mPage->find('h1.entry-title', 0)->plaintext);
     $result['name'] = $titleData['name'];
@@ -104,7 +92,11 @@ function getDocumentsInPage(int $page = 1, ?string $s = null): ?array
     if ($response == '') {
         return null;
     }
-    $mPage = str_get_html($response)->find('body', 0);
+    $document = str_get_html($response);
+    if ($document == null) {
+        return null;
+    }
+    $mPage = $document->find('body', 0);
     $pages = 1;
     $links = $mPage->find('div[class=nav-links]', 0);
     if ($links != null) {
