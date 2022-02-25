@@ -1,6 +1,6 @@
 <?php
 
-require_once('./includes/main_parser.php');
+require_once('../includes/main_parser.php');
 
 $page = 1;
 if (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0)
@@ -329,7 +329,7 @@ function createDocument(array $data)
             <div style="background-image: url(<?= $data['image'] ?>);"></div>
             <header>
                 <div class="d-name"><?= $data['name'] ?></div>
-                <div><?= $data['description'] ?></div>
+                <div><?= $data['year'] ?></div>
             </header>
         </div>
         <!-- <img src="{}" alt="{$data['name']}"> -->
