@@ -2,9 +2,12 @@
 require_once(__DIR__ . '/simple_html_dom.php');
 require_once(__DIR__ . '/base.php');
 
+const ENCRYPT_KEY = "__^!@XQ@z#$&*^%%Y&$&*^__";
+const ENCRYPT_METHOD = "AES-256-ECB";
 
-function getDownloadLink(array $credentials)
+function getDownloadLink(string $token)
 {
+    $credentials = (array) json_decode(decrypt($token));
     $response = getCurlData('start-downloading/', $credentials);
     if ($response == null)
         return null;
@@ -18,6 +21,9 @@ function getDownloadLink(array $credentials)
     }
     $result = [];
     $downloadAnchor = $downloadPage->find('a[onclick=open_win()]', 0);
+    if ($downloadAnchor == null) {
+        return null;
+    }
     $result['url'] = $downloadAnchor->href;
     foreach ($downloadPage->find('img[src^=/screenshot]') as $screenshot) {
         $imageUrl = $BASE_URL . $screenshot->src;
@@ -74,8 +80,18 @@ function getDocumentInfo(string $uri): ?array
     $relatedPosts = $mPage->find('div.related-posts', 0);
     $result['related'] = getDocuments($relatedPosts);
 
-    foreach ($mPage->find('input[type=hidden]') as $input)
-        $result['credentials'][$input->name] = $input->value;
+    $tokenParams = [];
+
+    foreach ($mPage->find('input[type=hidden]') as $input){
+        if ($input->value == '#') {
+            $tokenParams = null;
+            break;
+        }
+        $tokenParams[$input->name] = $input->value;
+    }        
+    if ($tokenParams != null) {
+        $result['token'] = encrypt(json_encode($tokenParams));
+    }
     return $result;
 }
 
@@ -126,6 +142,14 @@ function getDocuments($container) : array{
         ];
     }
     return $documents;
+}
+
+function encrypt(string $data):string{
+    return openssl_encrypt($data, ENCRYPT_METHOD, ENCRYPT_KEY);
+}
+function decrypt(string $hash): string
+{
+    return openssl_decrypt($hash, ENCRYPT_METHOD, ENCRYPT_KEY);
 }
 
 function getTitleData(string $title)

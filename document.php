@@ -2,17 +2,22 @@
 include('./includes/main_parser.php');
 
 if (!isset($_GET['uri'])) {
-    die("Unknown Error Occured!");
+    header('Location: ' . './error/400');
 }
 $uri = $_GET['uri'];
 $info = getDocumentInfo($uri, null);
 
 if ($info == null) {
-    die("Unknown Error Occured!");
+    header('Location: ' . './error/500');
 }
-$downloadData = getDownloadLink($info['credentials']);
+$downloadData = null;
 
-// die(json_encode($downloadData, JSON_PRETTY_PRINT));
+if (isset($info['token'])) {
+    $downloadData = getDownloadLink($info['token']);
+    if ($downloadData == null) {
+        header('Location: ' . './error/500');
+    }
+}
 
 
 $BASE_URL = getBaseUrl();
@@ -24,7 +29,7 @@ $BASE_URL = getBaseUrl();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Page</title>
+    <title>Document Page</title>
     <style>
         body {
             margin: 0;
@@ -65,12 +70,16 @@ $BASE_URL = getBaseUrl();
 
 <body>
 
+    <?php
+    if ($downloadData != null) {
+    ?>
+
     <div class="center-div">
         <a class="download-btn" href="<?= $downloadData['url'] ?>">Download</a>
     </div>
 
     <!-- form to send src -->
-    <form class="center-div" action="player.php" method="post">
+    <form class="center-div" action="./player" method="post">
         <input type="hidden" name="src" value="<?= $downloadData['url'] ?>">
         <button type="submit" class="download-btn">Play Online</button>
     </form>
@@ -94,6 +103,16 @@ $BASE_URL = getBaseUrl();
     ?>
     <br>
     <br>
+    <?php
+    } else {
+    ?>
+    <div class="center-div">
+        <h2>Movie Coming Soon</h2>
+    </div>
+    <?php
+    }
+    ?>
+
 </body>
 
 </html>

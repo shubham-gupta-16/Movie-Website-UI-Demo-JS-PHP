@@ -11,13 +11,12 @@ $s = null;
 if (isset($_GET['s']) && strlen($_GET['s']) > 0)
     $s = $_GET['s'];
 
-
-
-
-
 $BASE_URL = getBaseUrl();
 
 $pageData = getDocumentsInPage($page, $s);
+if ($pageData == null) {
+    header('Location: ' . './error/500');
+}
 
 // die(json_encode($pageData, JSON_PRETTY_PRINT));
 /* header('Content-Type: application/json');
@@ -46,6 +45,13 @@ die(); */
             padding: 0;
             background-color: #002233;
             font-family: 'Calibri', sans-serif;
+        }
+
+        footer {
+            background-color: #001122;
+            color: white;
+            padding-top: 10px;
+            margin-top: 35px;
         }
 
         a {
@@ -220,13 +226,6 @@ die(); */
             background-color: #000511;
         }
 
-        footer {
-            background-color: #001122;
-            color: white;
-            padding-top: 10px;
-            margin-top: 35px;
-        }
-
         @media screen and (max-width: 600px) {
             .article-grid {
                 grid-gap: 10px;
@@ -349,7 +348,7 @@ function getHref($page)
 function createDocument(array $data)
 {
 ?>
-    <a href="./download.php?uri=<?= $data['uri'] ?>" class="">
+    <a href="./document?uri=<?= $data['uri'] ?>" class="">
         <div class="doc-card">
             <div style="background-image: url(<?= $data['image'] ?>);"></div>
             <header>

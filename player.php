@@ -1,6 +1,6 @@
 <?php
 if (!isset($_POST['src'])) {
-    header("Location: /");
+    header("Location: ./");
     exit;
 }
 $src = $_POST['src']

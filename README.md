@@ -61,60 +61,57 @@ Note: uri must be url encoded.
 Response:
 ```
 {
-	"name": "Moonfall",
-	"year": "2022",
-	"language": "Hindi – English",
-	"size": "889mb",
-	"quality": "720p HDCam",
-	"genres": "Action, Adventure, Fantasy",
-	"country": "United States, Canada, China, United Kingdom",
-	"actors": "Halle Berry, Patrick Wilson, John Bradley",
-	"info": [
-		"Moonfall is an impending sci-fi activity movie, co-composed and coordinated by Roland Emmerich. It stars Halle Berry, Patrick Wilson, John Bradley, Charlie Plummer, Michael Peña, and Donald Sutherland.",
-		"Moonfall is planned to be delivered dramatically on February 4, 2022, by Lionsgate.\r\n A secretive power thumps the Moon from its circle around Earth and sends it plunging on an impact course with life as far as we might be concerned. With only a short time before sway and the world near the very edge of destruction, NASA leader and previous space traveler Jo Fowler (Halle Berry) is persuaded she has the way to saving all of us – yet just a single space explorer from quite a while ago, Brian Harper (Patrick Wilson) and connivance scholar K.C. Houseman (John Bradley) trust her."
-	],
-	"related": [
-		{
-			"uri": "2020-movies\/the-old-ways-full-movie-download-free-hd\/",
-			"name": "The Old Ways",
-			"year": "2020",
-			"image": "https:\/\/123mkv.buzz\/wp-content\/uploads\/2021\/08\/The-Old-Ways-Full-Movie-Download-Free-2020-HD.jpg"
-		},
-		{
-			"uri": "2015-movies\/ant-man-full-movie-download-free-dual-audio-hd1\/",
-			"name": "Ant-Man",
-			"year": "2015",
-			"image": "https:\/\/123mkv.buzz\/wp-content\/uploads\/2020\/12\/Ant-Man-Full-Movie-Download-Free-2015-Dual-Audio-HD.jpg"
-		},
-		{
-			"uri": "2021-movies\/friends-the-reunion-full-movie-download-hd-free\/",
-			"name": "Friends: The Reunion",
-			"year": "2021",
-			"image": "https:\/\/123mkv.buzz\/wp-content\/uploads\/2021\/05\/Friends-The-Reunion-Full-Movie-Download-Free-2021-HD.jpg"
-		}
-	],
-	"credentials": {
-		"fname": "Moonfall.2022.Hdcam.720P.Hindi.English.Aac.2.0.X264.mkv",
-		"fsip": "srv14."
-	}
+  "name": "Moonfall",
+  "year": "2022",
+  "language": "Hindi – English",
+  "size": "889mb",
+  "quality": "720p HDCam",
+  "genres": "Action, Adventure, Fantasy",
+  "country": "United States, Canada, China, United Kingdom",
+  "actors": "Halle Berry, Patrick Wilson, John Bradley",
+  "info": [
+    "Moonfall is an impending sci-fi activity movie, co-composed and coordinated by Roland Emmerich. It stars Halle Berry, Patrick Wilson, John Bradley, Charlie Plummer, Michael Peña, and Donald Sutherland.",
+    "Moonfall is planned to be delivered dramatically on February 4, 2022, by Lionsgate.\r\n A secretive power thumps the Moon from its circle around Earth and sends it plunging on an impact course with life as far as we might be concerned. With only a short time before sway and the world near the very edge of destruction, NASA leader and previous space traveler Jo Fowler (Halle Berry) is persuaded she has the way to saving all of us – yet just a single space explorer from quite a while ago, Brian Harper (Patrick Wilson) and connivance scholar K.C. Houseman (John Bradley) trust her."
+  ],
+  "related": [
+    {
+      "uri": "2020-movies\/the-old-ways-full-movie-download-free-hd\/",
+      "name": "The Old Ways",
+      "year": "2020",
+      "image": "https:\/\/123mkv.buzz\/wp-content\/uploads\/2021\/08\/The-Old-Ways-Full-Movie-Download-Free-2020-HD.jpg"
+    },
+    {
+      "uri": "2015-movies\/ant-man-full-movie-download-free-dual-audio-hd1\/",
+      "name": "Ant-Man",
+      "year": "2015",
+      "image": "https:\/\/123mkv.buzz\/wp-content\/uploads\/2020\/12\/Ant-Man-Full-Movie-Download-Free-2015-Dual-Audio-HD.jpg"
+    },
+    {
+      "uri": "2021-movies\/friends-the-reunion-full-movie-download-hd-free\/",
+      "name": "Friends: The Reunion",
+      "year": "2021",
+      "image": "https:\/\/123mkv.buzz\/wp-content\/uploads\/2021\/05\/Friends-The-Reunion-Full-Movie-Download-Free-2021-HD.jpg"
+    }
+  ],
+  "token": "N8tyW1bzM9aOyJIX9c8ZgPUwkoGNNq80ObDO1Hwkto0r6OC9VCINqqBKG6Z2cXru43oF60kfkrlMTRRHjCsrea6fm3YKZy7vN0HWbB3F3V8="
 }
 ```
 ### Get Download URL and Screenshots
 
 ```
-GET api/download.php?fname=Moonfall.2022.Hdcam.720P.Hindi.English.Aac.2.0.X264.mkv&fsip=srv14.
+GET api/download.php?token=N8tyW1bzM9aOyJIX9c8ZgPUwkoGNNq80ObDO1Hwkto0r6OC9VCINqqBKG6Z2cXru43oF60kfkrlMTRRHjCsrea6fm3YKZy7vN0HWbB3F3V8=.
 ```
-Note: Send all the credentials which you get in movie info as GET params.
+Note: You can get the token in movie info response. If token is not present there, that means the movie is not available for download or not released yet.
 
 Response:
 ```
 {
-	"url": "https:\/\/srv14.dfiles.xyz\/downmkv.php?filename=Moonfall.2022.Hdcam.720P.Hindi.English.Aac.2.0.X264.mkv&id=144342884c883f04066cc281c469db38&key=1645825168",
-	"screenshots": [
-		"https:\/\/123mkv.buzz\/\/screenshots\/Moonfall.2022.Hdcam.720P.Hindi.English.Aac.2.0.X264.mkv%201%20(1).jpg",
-		"https:\/\/123mkv.buzz\/\/screenshots\/Moonfall.2022.Hdcam.720P.Hindi.English.Aac.2.0.X264.mkv%201%20(2).jpg",
-		"https:\/\/123mkv.buzz\/\/screenshots\/Moonfall.2022.Hdcam.720P.Hindi.English.Aac.2.0.X264.mkv%201%20(3).jpg"
-	]
+  "url": "https:\/\/srv14.dfiles.xyz\/downmkv.php?filename=Moonfall.2022.Hdcam.720P.Hindi.English.Aac.2.0.X264.mkv&id=144342884c883f04066cc281c469db38&key=1645825168",
+  "screenshots": [
+    "https:\/\/123mkv.buzz\/\/screenshots\/Moonfall.2022.Hdcam.720P.Hindi.English.Aac.2.0.X264.mkv%201%20(1).jpg",
+    "https:\/\/123mkv.buzz\/\/screenshots\/Moonfall.2022.Hdcam.720P.Hindi.English.Aac.2.0.X264.mkv%201%20(2).jpg",
+    "https:\/\/123mkv.buzz\/\/screenshots\/Moonfall.2022.Hdcam.720P.Hindi.English.Aac.2.0.X264.mkv%201%20(3).jpg"
+  ]
 }
 ```
 

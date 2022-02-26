@@ -1,2 +1,15 @@
 RewriteEngine On
 ErrorDocument 404 /static/404.php
+ErrorDocument 500 /static/500.php
+
+
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME}\.php -f 
+
+
+RewriteRule ^(.*)$ $1.php
+# hastag id
+# RewriteRule ^(api/document.*)$ api/document.php?uri=$1
+# RewriteRule ^(top-products|recent-products|wishlist|cart) index.php?page=$1
+# RewriteRule ^(.*)/p/([0-9]+)$ index.php [NC,L,QSA]
+# RewriteRule ^search/(.*)$ index.php [NC,L,QSA]

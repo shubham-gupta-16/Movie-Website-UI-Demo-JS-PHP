@@ -4,12 +4,12 @@ require_once __DIR__ . '/curl.php';
 
 function getBaseUrl():string
 {
-    return file_get_contents(__DIR__ . "/.env");
+    return file_get_contents(__DIR__ . "/SOURCE_URL");
 }
 
 function setBaseUrl(string $url)
 {
-    file_put_contents(__DIR__ . "/.env", $url);
+    file_put_contents(__DIR__ . "/SOURCE_URL", $url);
 }
 
 function getCurlData(string $path, ?array $postArr): ?string
