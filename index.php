@@ -6,14 +6,22 @@ $page = 1;
 if (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0)
     $page = (int)$_GET['page'];
 
-
-$s = null;
-if (isset($_GET['s']) && strlen($_GET['s']) > 0)
-    $s = $_GET['s'];
-
 $BASE_URL = getBaseUrl();
 
-$pageData = getDocumentsInPage($page, $s);
+$type = null;
+$value = null;
+if (isset($_GET['category']) && strlen($_GET['category']) > 0) {
+    $value = $_GET['category'];
+    $type = 'category';
+} elseif (isset($_GET['year']) && strlen($_GET['year']) > 0) {
+    $value = $_GET['year'];
+    $type = 'year';
+} elseif (isset($_GET['s']) && strlen($_GET['s']) > 0) {
+    $value = $_GET['s'];
+    $type = 's';
+}
+
+$pageData = getDocumentsInPage($page, $type, $value);
 if ($pageData == null) {
     header('Location: ' . './error/500');
 }
@@ -274,11 +282,11 @@ die(); */
                 <?php
                 if ($page > 1) {
                 ?>
-                    <a href="<?= getHref($page - 1) ?>">PREV</a>
+                    <a href="<?= getHref($page - 1, $type, $value) ?>">PREV</a>
                 <?php
                 }
                 ?>
-                <a href="<?= getHref(1) ?>" class="<?php if ($page == 1) echo 'active' ?>">1</a>
+                <a href="<?= getHref(1, $type, $value) ?>" class="<?php if ($page == 1) echo 'active' ?>">1</a>
                 <?php
                 if ($page > 4) {
                 ?>
@@ -291,7 +299,7 @@ die(); */
                 $startPoint = ($page > 4 ? $page - 2 : 2);
                 for ($i = $startPoint; $i <= $row; $i++) {
                 ?>
-                    <a href="<?= getHref($i) ?>" class="<?php if ($page == $i) echo 'active' ?>">
+                    <a href="<?= getHref($i, $type, $value) ?>" class="<?php if ($page == $i) echo 'active' ?>">
                         <?= $i; ?>
                     </a>
                 <?php
@@ -307,7 +315,7 @@ die(); */
                 <?php
                 if ($pageData['pages'] > 4 && $page < $pageData['pages']) {
                 ?>
-                    <a href="<?= getHref($pageData['pages']) ?>" class="<?php if ($page == $pageData['pages']) echo 'active' ?>">
+                    <a href="<?= getHref($pageData['pages'], $type, $value) ?>" class="<?php if ($page == $pageData['pages']) echo 'active' ?>">
                         <?= $pageData['pages'] ?>
                     </a>
                 <?php
@@ -316,7 +324,7 @@ die(); */
                 <?php
                 if ($page < $pageData['pages']) {
                 ?>
-                    <a href="<?= getHref($page + 1) ?>">NEXT</a>
+                    <a href="<?= getHref($page + 1, $type, $value) ?>">NEXT</a>
                 <?php
                 }
                 ?>
@@ -337,12 +345,18 @@ die(); */
 
 <?php
 
-function getHref($page)
+function getHref(int $page, $type, $value)
 {
-    global $s;
     $href = "?page=" . $page;
-    if ($s != null) $href .= "&s=" . $s;
-    return $href;
+    if ($type != null && $value != null) $href = "?$type=" . $value . appendPage("&", $page);
+    else $href = appendPage("?", $page);
+        return $href;
+}
+function appendPage(string $with, int $page)
+{
+    if ($page > 1)
+        return $with . "page=" . $page;
+    return "";
 }
 
 function createDocument(array $data)

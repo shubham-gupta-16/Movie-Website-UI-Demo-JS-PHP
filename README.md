@@ -25,9 +25,20 @@ This website is created for educational purpose. It uses the data of 123MKV. It 
 ```
 GET api/
 GET api/?page=2
+
 GET api/?s=spiderman
 GET api/?s=spiderman&page=2
+
+GET api/?category=south-movies
+GET api/?category=hindi-dubbed-movies&page=2
+
+GET api/?year=2022
+GET api/?year=2000&page=2
+
 ```
+- Year: 2000 to Current Year
+- Categories: hindi-movies, hollywood-movies, hindi-dubbed-movies, south-movies
+
 Response:
 ```
 {

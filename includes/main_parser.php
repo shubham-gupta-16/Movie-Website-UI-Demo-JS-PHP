@@ -28,7 +28,6 @@ function getDownloadLink(string $token)
     foreach ($downloadPage->find('img[src^=/screenshot]') as $screenshot) {
         $imageUrl = $BASE_URL . $screenshot->src;
         $result['screenshots'][] = $imageUrl;
-        
     }
     return $result;
 }
@@ -82,24 +81,32 @@ function getDocumentInfo(string $uri): ?array
 
     $tokenParams = [];
 
-    foreach ($mPage->find('input[type=hidden]') as $input){
+    foreach ($mPage->find('input[type=hidden]') as $input) {
         if ($input->value == '#') {
             $tokenParams = null;
             break;
         }
         $tokenParams[$input->name] = $input->value;
-    }        
+    }
     if ($tokenParams != null) {
         $result['token'] = encrypt(json_encode($tokenParams));
     }
     return $result;
 }
 
-function getDocumentsInPage(int $page = 1, ?string $s = null): ?array
+function getDocumentsInPage(int $page = 1, ?string $type, ?string $value = null): ?array
 {
     $path = "";
-    if ($s != null)
-        $path .= 'search/' . $s . '/';
+    if ($type != null && $value != null) {
+        if ($type == 'year'){
+            $type = 'category';
+            $value .= '-movies';
+        } else if ($type == 's') {
+            $type = 'search';
+        }
+            $path .= $type . '/' . $value . '/';
+
+    }
     $path .= "page/" . $page . "/";
 
     $response = getCurlData($path, null);
@@ -122,14 +129,15 @@ function getDocumentsInPage(int $page = 1, ?string $s = null): ?array
     }
     if ($pages < $page) {
         $pages = $page;
-    } 
+    }
     return [
         'pages' => $pages,
         'documents' => getDocuments($mPage)
     ];
 }
 
-function getDocuments($container) : array{
+function getDocuments($container): array
+{
     $documents = [];
     foreach ($container->find('article') as $article) {
         $anc = $article->find('a', 1);
@@ -137,14 +145,15 @@ function getDocuments($container) : array{
         $documents[] = [
             'uri' => substr(parse_url($anc->href, PHP_URL_PATH), 1),
             'name' => $titleData['name'],
-            'year' => (isset($titleData['year'])) ?$result['year'] = $titleData['year']: "",
+            'year' => (isset($titleData['year'])) ? $result['year'] = $titleData['year'] : "",
             'image' => $article->find('img', 0)->src
         ];
     }
     return $documents;
 }
 
-function encrypt(string $data):string{
+function encrypt(string $data): string
+{
     return openssl_encrypt($data, ENCRYPT_METHOD, ENCRYPT_KEY);
 }
 function decrypt(string $hash): string
