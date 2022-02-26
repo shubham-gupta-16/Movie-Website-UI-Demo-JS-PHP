@@ -21,6 +21,7 @@ $src = $_POST['src']
         body {
             margin: 0;
             padding: 0;
+            background-color: #000000;
             font-family: 'Calibri', sans-serif;
         }
 
@@ -29,11 +30,12 @@ $src = $_POST['src']
         }
 
         .container {
+            background-color: black;
             display: block;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 15px;
-            max-width: 1200px;
+            overflow: hidden;
+        }
+        video {
+            max-height: 480px;
         }
 
         .center-div {
@@ -48,10 +50,9 @@ $src = $_POST['src']
 
     <div class="container">
 
-        <br><br>
 
         <!-- video mp4 -->
-        <video width="100%" controls>
+        <video width="100%" height="100%" controls>
             <source src="<?= $src; ?>" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>

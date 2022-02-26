@@ -1,27 +1,21 @@
 <?php
-include('./includes/simple_html_dom.php');
-include('./includes/base.php');
+include('../includes/main_parser.php');
+
 if (!isset($_GET['uri'])) {
     die("Unknown Error Occured!");
 }
 $uri = $_GET['uri'];
-$response = getCurlData($uri, null);
+$info = getDocumentInfo($uri, null);
 
-if ($response == '') {
+if ($info == null) {
     die("Unknown Error Occured!");
 }
-$mPage = str_get_html($response);
+$downloadData = getDownloadLink($info['credentials']);
 
-$params = [];
-foreach ($mPage->find('input[type=hidden]') as $input)
-    $params[$input->name] = $input->value;
-$response = getCurlData('start-downloading/', $params);
+// die(json_encode($downloadData, JSON_PRETTY_PRINT));
+
+
 $BASE_URL = getBaseUrl();
-$downloadPage = str_get_html($response);
-
-$downloadAnchor = $downloadPage->find('a[onclick=open_win()]', 0);
-$downloadAnchor->class = 'download-btn';
-$downloadAnchor->innertext = 'Download Now';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +29,8 @@ $downloadAnchor->innertext = 'Download Now';
         body {
             margin: 0;
             padding: 0;
+            color: white;
+            background-color: #002233;
             font-family: 'Calibri', sans-serif;
         }
 
@@ -55,14 +51,14 @@ $downloadAnchor->innertext = 'Download Now';
 
         .download-btn {
             text-decoration: none;
-            color: white;
+            color: #0099ff;
             padding: 8px 20px;
             outline: none;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             display: inline-block;
-            background-color: #a82711;
+            background-color: #001122;
         }
     </style>
 </head>
@@ -70,12 +66,12 @@ $downloadAnchor->innertext = 'Download Now';
 <body>
 
     <div class="center-div">
-        <?= $downloadAnchor->outertext ?>
+        <a class="download-btn" href="<?= $downloadData['url'] ?>">Download</a>
     </div>
 
     <!-- form to send src -->
     <form class="center-div" action="player.php" method="post">
-        <input type="hidden" name="src" value="<?= $downloadAnchor->href ?>">
+        <input type="hidden" name="src" value="<?= $downloadData['url'] ?>">
         <button type="submit" class="download-btn">Play Online</button>
     </form>
     <!-- <video width="320" height="240" controls>
@@ -91,12 +87,13 @@ $downloadAnchor->innertext = 'Download Now';
     </div>
 
     <?php
-    foreach ($downloadPage->find('img[src^=/screenshot]') as $screenshot) {
-        $screenshot->src = $BASE_URL . $screenshot->src;
-        echo '<div class="center-div">' . $screenshot->outertext . '</div>';
+    foreach ($downloadData['screenshots'] as $screenshot) {
+        echo '<div class="center-div"><img src="' . $screenshot . '" width="700"></div>';
     }
 
     ?>
+    <br>
+    <br>
 </body>
 
 </html>

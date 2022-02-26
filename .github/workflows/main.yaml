@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - dev
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
@@ -17,4 +17,4 @@ jobs:
         server: ${{ secrets.ftp_hostname }}
         username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
-        server-dir: ./htdocs/
+        server-dir: ./dev.we-are.great-site.net/htdocs/
