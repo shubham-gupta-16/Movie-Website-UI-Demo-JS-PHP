@@ -1,6 +1,6 @@
 <?php
 
-require_once('../includes/main_parser.php');
+require_once('./includes/main_parser.php');
 
 $page = 1;
 if (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0)

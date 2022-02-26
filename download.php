@@ -1,5 +1,5 @@
 <?php
-include('../includes/main_parser.php');
+include('./includes/main_parser.php');
 
 if (!isset($_GET['uri'])) {
     die("Unknown Error Occured!");
