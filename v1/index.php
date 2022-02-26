@@ -97,7 +97,7 @@ die(); */
             bottom: 0;
             left: 0;
             transform: scale(1.01);
-            transition: 0.4s;
+            transition: transform 0.4s ease 0.1s;
             right: 0;
         }
 
@@ -133,13 +133,13 @@ die(); */
 
         .doc-card>header>div {
             transform: translateY(8px);
-            transition: transform 0.5s;
+            transition: transform 0.6s;
         }
 
         .doc-card>header>.d-name {
             font-size: 1.2em;
             font-weight: bold;
-            transition: 0.3s;
+            transition: 0.4s;
 
         }
 
