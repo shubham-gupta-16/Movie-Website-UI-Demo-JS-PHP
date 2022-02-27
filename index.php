@@ -452,7 +452,7 @@ die(); */
                 <div>
                     <form class="search" action="" method="GET">
                         <span id="mobile-search-close" class="image-icon back-icon"></span>
-                        <input type="text" name="s" placeholder="Search for a movie...">
+                        <input type="text" name="s" placeholder="Search for a movie..." value="<?=$type == 's' ? $value : ''?>">
                         <button type="submit" class="image-icon search-icon"></button>
                     </form>
                     <button type="submit" id="mobile-search-open" class="image-icon search-icon"></button>
