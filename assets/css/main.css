@@ -50,3 +50,13 @@ a {
     justify-content: center;
     margin-top: 20px;
 }
+
+.center-div.auto {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 0 15px;
+    border: none;
+}

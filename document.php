@@ -1,5 +1,6 @@
 <?php
-include('./includes/decoder/main_parser.php');
+require_once('./includes/decoder/main_parser.php');
+require_once('./includes/ui/RenderUI.php');
 
 if (!isset($_GET['uri'])) {
     header('Location: ' . './error/400');
@@ -26,30 +27,9 @@ $BASE_URL = getBaseUrl();
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Page</title>
+    <?php RenderUI::headComponents('Document', './', ['main.css', 'articles.css', 'nav.css']); ?>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            color: white;
-            background-color: #002233;
-            font-family: 'Calibri', sans-serif;
-        }
-
-        .center-div {
-            display: flex;
-            justify-content: center;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 20px;
-            padding: 0 15px;
-            border: none;
-        }
-
-        img.aligncenter {
+        img.screenshot {
             width: 100%;
             max-width: 700px;
         }
@@ -70,48 +50,51 @@ $BASE_URL = getBaseUrl();
 
 <body>
 
-    <?php
-    if ($downloadData != null) {
-    ?>
+    <?php RenderUI::navbar(); ?>
+    <div class="container main-page">
+        <?php
+        if ($downloadData != null) {
+        ?>
+            <div class="center-div auto">
+                <a class="download-btn" href="<?= $downloadData['url'] ?>">Download</a>
+            </div>
 
-    <div class="center-div">
-        <a class="download-btn" href="<?= $downloadData['url'] ?>">Download</a>
-    </div>
-
-    <!-- form to send src -->
-    <form class="center-div" action="./player" method="post">
-        <input type="hidden" name="src" value="<?= $downloadData['url'] ?>">
-        <button type="submit" class="download-btn">Play Online</button>
-    </form>
-    <!-- <video width="320" height="240" controls>
+            <!-- form to send src -->
+            <form class="center-div auto" action="./player" method="post">
+                <input type="hidden" name="src" value="<?= $downloadData['url'] ?>">
+                <button type="submit" class="download-btn">Play Online</button>
+            </form>
+            <!-- <video width="320" height="240" controls>
         <source src="" type="video/mp4">
         Your browser does not support the video tag.
     </video> -->
-    <div class="center-div">
-        <center>In case of error, come back and re-click on download button.</center>
-    </div>
+            <div class="center-div auto">
+                <center>In case of error, come back and re-click on download button.</center>
+            </div>
 
-    <div class="center-div">
-        <h2>Screenshots:</h2>
-    </div>
+            <div class="center-div auto">
+                <h2>Screenshots:</h2>
+            </div>
 
-    <?php
-    foreach ($downloadData['screenshots'] as $screenshot) {
-        echo '<div class="center-div"><img src="' . $screenshot . '" width="700"></div>';
-    }
+            <?php
+            foreach ($downloadData['screenshots'] as $screenshot) {
+                echo '<div class="center-div"><img src="' . $screenshot . '" class="screenshot"></div>';
+            }
 
-    ?>
-    <br>
-    <br>
-    <?php
-    } else {
-    ?>
-    <div class="center-div">
-        <h2>Movie Coming Soon</h2>
+            ?>
+            <br>
+            <br>
+        <?php
+        } else {
+        ?>
+            <div class="center-div">
+                <h2>Movie Coming Soon</h2>
+            </div>
+        <?php
+        }
+        ?>
     </div>
-    <?php
-    }
-    ?>
+    <?php RenderUI::footer(['nav.js']); ?>
 
 </body>
 

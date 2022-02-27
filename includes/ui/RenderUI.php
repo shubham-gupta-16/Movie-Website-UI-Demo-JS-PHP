@@ -26,7 +26,7 @@ class RenderUI
     <?php
     }
 
-    public static function footer(string $basePath = './', ?array $js = null)
+    public static function footer(?array $js = null, string $basePath = './')
     {
     ?>
         <footer>
@@ -42,11 +42,11 @@ class RenderUI
         }
     }
 
-    public static function navbar(?string $type, ?string $value)
+    public static function navbar(?string $type = null, ?string $value = 'not-fixed')
     {
         $categories = [
             [
-                'name' => 'Recommanded',
+                'name' => 'Newly Added',
                 'href' => './',
                 'active' => $value == null
             ],
@@ -72,7 +72,7 @@ class RenderUI
                 <div>LOGO</div>
                 <div class="navigation">
                     <div>
-                        <form class="search" action="" method="GET">
+                        <form class="search" action="./" method="GET">
                             <span id="mobile-search-close" class="image-icon back-icon"></span>
                             <input type="text" name="s" placeholder="Search for a movie..." value="<?= $type == 's' ? $value : '' ?>">
                             <button type="submit" class="image-icon search-icon"></button>
@@ -191,5 +191,3 @@ class RenderUI
         return "";
     }
 }
-
-

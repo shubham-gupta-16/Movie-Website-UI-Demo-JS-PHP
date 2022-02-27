@@ -21,20 +21,13 @@ if (isset($_GET['category']) && strlen($_GET['category']) > 0) {
     $value = $_GET['s'];
     $type = 's';
 }
-
-// $pageData = ['pages' => 1, 'documents' => []];
 $pageData = getDocumentsInPage($page, $type, $value);
 if ($pageData == null) {
     header('Location: ' . './error/500');
 }
-// die(json_encode($pageData, JSON_PRETTY_PRINT));
-/* header('Content-Type: application/json');
-echo json_encode($documents);
-die(); */
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <?php RenderUI::headComponents('Home Page', './', ['main.css', 'articles.css', 'nav.css']); ?>
     <style>
@@ -83,18 +76,7 @@ die(); */
 
         <?php RenderUI::pagination($pageData['pages'], $page, $type, $value); ?>
     </div>
-    <?php RenderUI::footer(); ?>
-    <script>
-        let searchOpen = document.getElementById('mobile-search-open');
-        let searchClose = document.getElementById('mobile-search-close');
-        let searchForm = document.querySelector('form.search');
-        searchOpen.addEventListener('click', () => {
-            searchForm.style.display = 'grid';
-        });
-        searchClose.addEventListener('click', () => {
-            searchForm.style.display = 'none';
-        });
-    </script>
+    <?php RenderUI::footer(['nav.js']); ?>
 </body>
 
 </html>
