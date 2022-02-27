@@ -21,6 +21,7 @@ if (isset($_GET['category']) && strlen($_GET['category']) > 0) {
     $type = 's';
 }
 
+// $pageData = ['pages' => 1, 'documents' => []];
 $pageData = getDocumentsInPage($page, $type, $value);
 if ($pageData == null) {
     header('Location: ' . './error/500');
@@ -240,21 +241,31 @@ die(); */
             width: 100%;
         }
 
-        form.search button[type=submit] {
-            background-color: transparent;
-            border: none;
-            width: 42px;
-            height: 32px;
-            border-radius: 50px;
+        .image-icon {
             background-repeat: no-repeat;
             background-position: center;
             background-size: 20px;
-            background-image: url('./assets/search_icon.svg');
-            cursor: pointer;
             transition: 0.2s;
+            border: none;
+            background-color: transparent;
         }
 
-        form.search button[type=submit]:hover {
+        button.search-icon {
+            width: 42px;
+            height: 32px;
+            border-radius: 50px;
+            background-image: url('./assets/search_icon.svg');
+        }
+
+        span.back-icon {
+            display: none;
+            width: 42px;
+            height: 32px;
+            border-radius: 50px;
+            background-image: url('./assets/back_icon.svg');
+        }
+
+        button.search-icon:hover {
             background-color: #003344;
         }
 
@@ -400,11 +411,22 @@ die(); */
 
 
             .nav-item.selector {
-                display: inline-block;
+                display: block;
             }
         }
 
+        #mobile-search-open {
+            display: none;
+        }
+
         @media screen and (max-width: 500px) {
+            #mobile-search-open {
+                display: block;
+            }
+            span.back-icon {
+                display: block;
+            }
+
             form.search {
                 border-radius: 0;
                 position: fixed;
@@ -414,8 +436,8 @@ die(); */
                 top: 0;
                 background-color: #001122;
                 z-index: 1000;
-                height: 50px;
-                grid-template-columns: auto 50px;
+                height: 55px;
+                grid-template-columns: 50px auto 50px;
             }
 
         }
@@ -429,12 +451,14 @@ die(); */
             <div class="navigation">
                 <div>
                     <form class="search" action="" method="GET">
+                        <span id="mobile-search-close" class="image-icon back-icon"></span>
                         <input type="text" name="s" placeholder="Search for a movie...">
-                        <button type="submit"></button>
+                        <button type="submit" class="image-icon search-icon"></button>
                     </form>
+                    <button type="submit" id="mobile-search-open" class="image-icon search-icon"></button>
                 </div>
                 <div class="nav-dropdown">
-                    <span class="nav-item selector"></span>
+                    <span class="nav-item image-icon selector"></span>
                     <ul class="nav-dropdown-content">
                         <?php
                         foreach ($categories as $nav) {
@@ -525,6 +549,17 @@ die(); */
             <h4>This website was created for educational purpose. It uses the data of 123MKV. We never promote piracy of copyright content.</h4><span>Developer: Shubham Gupta</span><br><br><br>
         </center>
     </footer>
+    <script>
+        let searchOpen = document.getElementById('mobile-search-open');
+        let searchClose = document.getElementById('mobile-search-close');
+        let searchForm = document.querySelector('form.search');
+        searchOpen.addEventListener('click', () => {
+            searchForm.style.display = 'grid';
+        });
+        searchClose.addEventListener('click', () => {
+            searchForm.style.display = 'none';
+        });
+    </script>
 </body>
 
 </html>
