@@ -1,0 +1,90 @@
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    grid-gap: 20px;
+}
+
+.doc-card {
+    display: block;
+    background-color: #001122;
+    overflow: hidden;
+    position: relative;
+    padding-top: 150%;
+    transition: 0.3s;
+    border: 1px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.doc-card>div {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: scale(1.01);
+    transition: transform 0.4s ease 0.1s;
+    right: 0;
+}
+
+.doc-card:hover {
+    box-shadow: 0 0 25px rgba(50, 180, 255, 0.4);
+}
+
+.doc-card:hover>div {
+    transform: scale(1.1);
+    /* filter: blur(2px); */
+}
+
+.doc-card:hover>header {
+    opacity: 1;
+}
+
+.doc-card:hover>header>div {
+    transform: translateY(0px);
+}
+
+.doc-card>header {
+    position: absolute;
+    bottom: 0;
+    padding: 150px 10px 10px 10px;
+    opacity: 0;
+    color: white;
+    transition: 0.3s;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+
+    left: 0;
+    right: 0;
+}
+
+.doc-card>header>div {
+    transform: translateY(8px);
+    transition: transform 0.6s;
+}
+
+.doc-card>header>.d-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: 0.4s;
+
+}
+
+@media screen and (max-width: 600px) {
+    .article-grid {
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    }
+}
+
+@media screen and (max-width: 505px) {
+    .article-grid {
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    .doc-card>header>.d-name {
+        font-size: 16px;
+    }
+}

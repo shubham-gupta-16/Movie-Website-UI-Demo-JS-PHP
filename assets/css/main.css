@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Nunito', 'Calibri', sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+}
+
+img {
+    vertical-align: middle;
+}
+
+body {
+    font-size: 14px;
+    color: white;
+    margin: 0;
+    padding: 0;
+    background-color: #002233;
+}
+
+footer {
+    background-color: #001122;
+    color: white;
+    padding-top: 10px;
+    height: 130px;
+    overflow: hidden;
+    margin-top: 35px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.main-page {
+    margin-top: 100px;
+    min-height: calc(100vh - 100px - 130px - 35px);
+}
+
+.container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 15px;
+    max-width: 1200px;
+}
+
+.center-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

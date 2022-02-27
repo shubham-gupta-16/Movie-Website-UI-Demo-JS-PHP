@@ -1,6 +1,6 @@
 <?php
 
-require_once('./includes/main_parser.php');
+require_once('./includes/decoder/main_parser.php');
 
 $page = 1;
 if (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0)
@@ -61,214 +61,11 @@ die(); */
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Page</title>
+    <link href="./assets/css/main.css" rel="stylesheet">
+    <link href="./assets/css/articles.css" rel="stylesheet">
+    <link href="./assets/css/nav.css" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
-        /* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Rubik:wght@300;400;600&display=swap'); */
-        /* @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600&family=Nunito:wght@300;400;600&family=Rubik:wght@300;400;600&display=swap'); */
-
-        * {
-            box-sizing: border-box;
-            font-family: 'Nunito', 'Calibri', sans-serif;
-            /* font-family: 'Rubik', sans-serif; */
-            /* font-family: 'Comfortaa', cursive; */
-        }
-
-        img {
-            vertical-align: middle;
-        }
-
-        body {
-            font-size: 14px;
-            color: white;
-            margin: 0;
-            padding: 0;
-            background-color: #002233;
-        }
-
-        footer {
-            background-color: #001122;
-            color: white;
-            padding-top: 10px;
-            margin-top: 35px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .main-page {
-            margin-top: 100px;
-        }
-
-        .container {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 15px;
-            max-width: 1200px;
-        }
-
-        .center-div {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .article-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            grid-gap: 20px;
-        }
-
-
-
-        /* article card */
-
-        .doc-card {
-            display: block;
-            background-color: #001122;
-            overflow: hidden;
-            position: relative;
-            padding-top: 150%;
-            transition: 0.3s;
-            border: 1px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-        }
-
-        .doc-card>div {
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            transform: scale(1.01);
-            transition: transform 0.4s ease 0.1s;
-            right: 0;
-        }
-
-        .doc-card:hover {
-            box-shadow: 0 0 25px rgba(50, 180, 255, 0.4);
-        }
-
-        .doc-card:hover>div {
-            transform: scale(1.1);
-            /* filter: blur(2px); */
-        }
-
-        .doc-card:hover>header {
-            opacity: 1;
-        }
-
-        .doc-card:hover>header>div {
-            transform: translateY(0px);
-        }
-
-        .doc-card>header {
-            position: absolute;
-            bottom: 0;
-            padding: 150px 10px 10px 10px;
-            opacity: 0;
-            color: white;
-            transition: 0.3s;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
-
-            left: 0;
-            right: 0;
-        }
-
-        .doc-card>header>div {
-            transform: translateY(8px);
-            transition: transform 0.6s;
-        }
-
-        .doc-card>header>.d-name {
-            font-size: 1.2em;
-            font-weight: bold;
-            transition: 0.4s;
-
-        }
-
-        /* .doc-card img {
-            width: 100%;
-            margin: 0;
-            height: unset;
-        } */
-
-        img.aligncenter {
-            width: 100%;
-            max-width: 700px;
-        }
-
-        a.download-btn {
-            text-decoration: none;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 8px;
-            background-color: #a82711;
-        }
-
-        form.search {
-            display: grid;
-            grid-template-columns: auto auto;
-            background-color: #002233;
-            border-radius: 50px;
-            align-items: center;
-            gap: 5px;
-        }
-
-        ::placeholder {
-            color: #99aabb;
-            opacity: 1;
-        }
-
-        /* search input */
-        form.search input {
-            padding: 6px;
-            font-size: 17px;
-            height: 32px;
-            outline: none;
-        }
-
-        form.search input[type=text] {
-            border: none;
-            padding-left: 15px;
-            font-size: 14px;
-            background-color: transparent;
-            color: white;
-            width: 100%;
-        }
-
-        .image-icon {
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 20px;
-            transition: 0.2s;
-            border: none;
-            background-color: transparent;
-        }
-
-        button.search-icon {
-            width: 42px;
-            height: 32px;
-            border-radius: 50px;
-            background-image: url('./assets/search_icon.svg');
-        }
-
-        span.back-icon {
-            display: none;
-            width: 42px;
-            height: 32px;
-            border-radius: 50px;
-            background-image: url('./assets/back_icon.svg');
-        }
-
-        button.search-icon:hover {
-            background-color: #003344;
-        }
-
         .paginate-div {
             display: flex;
             justify-content: center;
@@ -296,152 +93,8 @@ die(); */
         .paginate-div>a.active {
             background-color: #000511;
         }
-
-        @media screen and (max-width: 600px) {
-            .article-grid {
-                grid-gap: 10px;
-                grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
-            }
-        }
-
-
-
-        @media screen and (max-width: 505px) {
-            .article-grid {
-                grid-gap: 10px;
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            }
-
-            .doc-card>header>.d-name {
-                font-size: 16px;
-            }
-        }
-
-        #toolbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 999;
-            background-color: #001122;
-        }
-
-        #toolbar>div {
-            height: 55px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        #toolbar>div>div.navigation {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .nav-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        ul.nav-dropdown-content {
-            display: flex;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-item {
-            text-decoration: none;
-            height: 55px;
-            color: #bbccdd;
-            display: inline-flex;
-            align-items: center;
-            padding: 12px;
-            transition: 0.2s;
-        }
-
-        .nav-item.selector {
-            background-image: url('./assets/menu_icon.svg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 20px;
-            display: none;
-            width: 45px;
-            border-radius: 6px;
-            height: 45px;
-        }
-
-        .nav-item:hover,
-        .nav-item.active {
-            background-color: #000715;
-            color: white;
-        }
-
-        @media screen and (max-width: 800px) {
-
-            .nav-dropdown:hover ul.nav-dropdown-content {
-                display: block;
-            }
-
-            ul.nav-dropdown-content {
-                display: none;
-                overflow: hidden;
-                position: absolute;
-                right: 0;
-                background-color: #003344;
-                min-width: 160px;
-                border-radius: 4px;
-                box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-                z-index: 999;
-            }
-
-            ul .nav-item {
-                width: 100%;
-            }
-
-            ul .nav-item.active {
-                background-color: #003f4f;
-            }
-
-            ul .nav-item:hover {
-                background-color: #004455;
-            }
-
-
-
-            .nav-item.selector {
-                display: block;
-            }
-        }
-
-        #mobile-search-open {
-            display: none;
-        }
-
-        @media screen and (max-width: 500px) {
-            #mobile-search-open {
-                display: block;
-            }
-            span.back-icon {
-                display: block;
-            }
-
-            form.search {
-                border-radius: 0;
-                position: fixed;
-                left: 0;
-                right: 0;
-                display: none;
-                top: 0;
-                background-color: #001122;
-                z-index: 1000;
-                height: 55px;
-                grid-template-columns: 50px auto 50px;
-            }
-
-        }
     </style>
+
 </head>
 
 <body>
@@ -452,7 +105,7 @@ die(); */
                 <div>
                     <form class="search" action="" method="GET">
                         <span id="mobile-search-close" class="image-icon back-icon"></span>
-                        <input type="text" name="s" placeholder="Search for a movie..." value="<?=$type == 's' ? $value : ''?>">
+                        <input type="text" name="s" placeholder="Search for a movie..." value="<?= $type == 's' ? $value : '' ?>">
                         <button type="submit" class="image-icon search-icon"></button>
                     </form>
                     <button type="submit" id="mobile-search-open" class="image-icon search-icon"></button>
@@ -546,7 +199,7 @@ die(); */
     </div>
     <footer>
         <center>
-            <h4>This website was created for educational purpose. It uses the data of 123MKV. We never promote piracy of copyright content.</h4><span>Developer: Shubham Gupta</span><br><br><br>
+            <h4>This website was created for educational purpose. It uses the data of 123MKV. We never promote piracy of copyright content.</h4><span>Developer: Shubham Gupta</span>
         </center>
     </footer>
     <script>
