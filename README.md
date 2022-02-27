@@ -37,7 +37,7 @@ GET api/?year=2000&page=2
 
 ```
 - Year: 2000 to Current Year
-- Categories: hindi-movies, hollywood-movies, hindi-dubbed-movies, south-movies
+- Categories: hindi-movies, hollywood-movies, hindi-dubbed-movies, south-movies, old-movies
 
 Response:
 ```

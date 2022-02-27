@@ -25,6 +25,28 @@ $pageData = getDocumentsInPage($page, $type, $value);
 if ($pageData == null) {
     header('Location: ' . './error/500');
 }
+$categories = [
+    [
+        'name' => 'Recommanded',
+        'href' => './',
+        'active' => $value == null
+    ],
+    [
+        'name' => 'Bollywood',
+        'href' => './?category=hindi-movies',
+        'active' => $value == 'hindi-movies'
+    ],
+    [
+        'name' => 'Hollywood',
+        'href' => './?category=hollywood-movies',
+        'active' => $value == 'hollywood-movies'
+    ],
+    [
+        'name' => 'South Indian',
+        'href' => './?category=south-movies',
+        'active' => $value == 'south-movies'
+    ],
+];
 
 // die(json_encode($pageData, JSON_PRETTY_PRINT));
 /* header('Content-Type: application/json');
@@ -40,8 +62,15 @@ die(); */
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Page</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
+        /* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Rubik:wght@300;400;600&display=swap'); */
+        /* @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600&family=Nunito:wght@300;400;600&family=Rubik:wght@300;400;600&display=swap'); */
+
         * {
             box-sizing: border-box;
+            font-family: 'Nunito', 'Calibri', sans-serif;
+            /* font-family: 'Rubik', sans-serif; */
+            /* font-family: 'Comfortaa', cursive; */
         }
 
         img {
@@ -49,10 +78,11 @@ die(); */
         }
 
         body {
+            font-size: 14px;
+            color: white;
             margin: 0;
             padding: 0;
             background-color: #002233;
-            font-family: 'Calibri', sans-serif;
         }
 
         footer {
@@ -64,6 +94,10 @@ die(); */
 
         a {
             text-decoration: none;
+        }
+
+        .main-page {
+            margin-top: 100px;
         }
 
         .container {
@@ -176,34 +210,53 @@ die(); */
             background-color: #a82711;
         }
 
-        .search-div form {
-            margin-bottom: 40px;
+        form.search {
             display: grid;
             grid-template-columns: auto auto;
+            background-color: #002233;
+            border-radius: 50px;
+            align-items: center;
             gap: 5px;
         }
 
-        /* search input */
-        .search-div input {
-            padding: 6px;
-            font-size: 17px;
-            outline: none;
-            border-radius: 5px;
+        ::placeholder {
+            color: #99aabb;
+            opacity: 1;
         }
 
-        .search-div input[type=text] {
-            border: 2px solid #557788;
-            background-color: #001122;
+        /* search input */
+        form.search input {
+            padding: 6px;
+            font-size: 17px;
+            height: 32px;
+            outline: none;
+        }
+
+        form.search input[type=text] {
+            border: none;
+            padding-left: 15px;
+            font-size: 14px;
+            background-color: transparent;
             color: white;
             width: 100%;
         }
 
-        .search-div input[type=submit] {
-            background-color: #001122;
+        form.search button[type=submit] {
+            background-color: transparent;
             border: none;
-            border: 2px solid #557788;
-            color: #0099ff;
+            width: 42px;
+            height: 32px;
+            border-radius: 50px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 20px;
+            background-image: url('./assets/search_icon.svg');
             cursor: pointer;
+            transition: 0.2s;
+        }
+
+        form.search button[type=submit]:hover {
+            background-color: #003344;
         }
 
         .paginate-div {
@@ -241,6 +294,8 @@ die(); */
             }
         }
 
+
+
         @media screen and (max-width: 505px) {
             .article-grid {
                 grid-gap: 10px;
@@ -251,22 +306,133 @@ die(); */
                 font-size: 16px;
             }
         }
+
+        #toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background-color: #001122;
+        }
+
+        #toolbar>div {
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #toolbar>div>div.navigation {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        ul.nav-dropdown-content {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            height: 55px;
+            color: #bbccdd;
+            display: inline-flex;
+            align-items: center;
+            padding: 12px;
+            transition: 0.2s;
+        }
+
+        .nav-item.selector {
+            display: none;
+            height: 45px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: #000715;
+            color: white;
+        }
+
+        @media screen and (max-width: 800px) {
+
+            .nav-dropdown:hover ul.nav-dropdown-content {
+                display: block;
+            }
+
+            ul.nav-dropdown-content {
+                display: none;
+                position: absolute;
+                right: 0;
+                background-color: #003344;
+                min-width: 160px;
+                border-radius: 4px;
+                box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+                z-index: 999;
+            }
+
+            ul .nav-item {
+                width: 100%;
+            }
+
+            .nav-item.selector {
+                display: inline-block;
+            }
+
+            form.search {
+                border-radius: 0;
+                position: fixed;
+                left: 0;
+                right: 0;
+                display: none;
+                top: 0;
+                background-color: #001122;
+                z-index: 1000;
+                height: 50px;
+                grid-template-columns: auto 50px;
+            }
+        }
     </style>
 </head>
 
 <body>
-
-    <div class="container">
-
-        <br><br>
+    <nav id="toolbar">
+        <div class="container">
+            <div>LOGO</div>
+            <div class="navigation">
+                <div>
+                    <form class="search" action="" method="GET">
+                        <input type="text" name="s" placeholder="Search for a movie...">
+                        <button type="submit"></button>
+                    </form>
+                </div>
+                <div class="nav-dropdown">
+                    <span class="nav-item selector">Mouse over me</span>
+                    <ul class="nav-dropdown-content">
+                        <?php
+                        foreach ($categories as $nav) {
+                        ?>
+                            <li>
+                                <a class="nav-item <?= $nav['active'] == true ? 'active' : '' ?>" href="<?= $nav['href'] ?>"><?= $nav['name'] ?></a>
+                            </li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-page">
 
         <!-- search input -->
-        <div class="center-div search-div">
-            <form action="" method="GET">
-                <input type="text" name="s" placeholder="Search for a movie...">
-                <input type="submit" value="Search">
-            </form>
-        </div>
         <div class="article-grid">
 
             <?php
@@ -350,12 +516,15 @@ function getHref(int $page, $type, $value)
     $href = "?page=" . $page;
     if ($type != null && $value != null) $href = "?$type=" . $value . appendPage("&", $page);
     else $href = appendPage("?", $page);
-        return $href;
+    return $href;
 }
 function appendPage(string $with, int $page)
 {
     if ($page > 1)
         return $with . "page=" . $page;
+    else if ($with == "?")
+        return "./";
+
     return "";
 }
 
