@@ -47,7 +47,6 @@ $categories = [
         'active' => $value == 'south-movies'
     ],
 ];
-
 // die(json_encode($pageData, JSON_PRETTY_PRINT));
 /* header('Content-Type: application/json');
 echo json_encode($documents);
@@ -352,11 +351,18 @@ die(); */
         }
 
         .nav-item.selector {
+            background-image: url('./assets/menu_icon.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 20px;
             display: none;
+            width: 45px;
+            border-radius: 6px;
             height: 45px;
         }
 
-        .nav-item:hover, .nav-item.active {
+        .nav-item:hover,
+        .nav-item.active {
             background-color: #000715;
             color: white;
         }
@@ -369,6 +375,7 @@ die(); */
 
             ul.nav-dropdown-content {
                 display: none;
+                overflow: hidden;
                 position: absolute;
                 right: 0;
                 background-color: #003344;
@@ -382,10 +389,22 @@ die(); */
                 width: 100%;
             }
 
+            ul .nav-item.active {
+                background-color: #003f4f;
+            }
+
+            ul .nav-item:hover {
+                background-color: #004455;
+            }
+
+
+
             .nav-item.selector {
                 display: inline-block;
             }
+        }
 
+        @media screen and (max-width: 500px) {
             form.search {
                 border-radius: 0;
                 position: fixed;
@@ -398,6 +417,7 @@ die(); */
                 height: 50px;
                 grid-template-columns: auto 50px;
             }
+
         }
     </style>
 </head>
@@ -414,7 +434,7 @@ die(); */
                     </form>
                 </div>
                 <div class="nav-dropdown">
-                    <span class="nav-item selector">Mouse over me</span>
+                    <span class="nav-item selector"></span>
                     <ul class="nav-dropdown-content">
                         <?php
                         foreach ($categories as $nav) {
