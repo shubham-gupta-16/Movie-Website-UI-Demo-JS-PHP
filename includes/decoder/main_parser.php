@@ -54,7 +54,13 @@ function getDocumentInfo(string $uri): ?array
         $result['year'] = $titleData['year'];
     }
 
-    $infos = $mPage->find('div.thecontent', 0)->find('p');
+    $theContent = $mPage->find('div.thecontent', 0);
+    if ($theContent == null) return null;
+    $infos = $theContent->find('p');
+    $result['image'] = $theContent->find('img', 0)->src;
+    if (!startsWith($result['image'], 'http')) {
+        $result['image'] = getBaseUrl() . $result['image'];
+    }
     $infoFetched = false;
     for ($i = 2; $i < sizeof($infos); $i++) {
         $info = html_entity_decode($infos[$i]->plaintext);
@@ -72,8 +78,11 @@ function getDocumentInfo(string $uri): ?array
             continue;
         }
         $row = explode(':', $info, 2);
-        if (sizeof($row) >= 2)
-            $result[strtolower($row[0])] = trim($row[1]);
+        if (sizeof($row) >= 2){
+            $key = strtolower($row[0]);
+            $result[$key == 'language' ? 'audio' : $key] = trim($row[1]);
+        }
+
     }
 
     $relatedPosts = $mPage->find('div.related-posts', 0);
@@ -177,4 +186,9 @@ function getTitleData(string $title)
 function endsWith($haystack, $needle)
 {
     return substr_compare($haystack, $needle, -strlen($needle)) === 0;
+}
+
+function startsWith($haystack, $needle)
+{
+    return substr($haystack, 0, strlen($needle)) === $needle;
 }

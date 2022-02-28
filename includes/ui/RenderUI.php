@@ -98,7 +98,7 @@ class RenderUI
         </nav>
         <?php
     }
-    public static function pagination(int $page, int $pages, ?string $type, ?string $value)
+    public static function pagination(int $pages, int $page, ?string $type, ?string $value)
     {
         if ($pages > 1) {
         ?>
