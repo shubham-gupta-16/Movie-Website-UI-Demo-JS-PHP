@@ -46,7 +46,8 @@ $BASE_URL = getBaseUrl();
             border: 1px solid transparent;
             transition: 0.2s;
         }
-        .download-btn:hover{
+
+        .download-btn:hover {
             background-color: #004455;
             border: 1px solid #006677;
         }
@@ -76,7 +77,8 @@ $BASE_URL = getBaseUrl();
             display: inline-block;
             font-size: 12px;
         }
-        p{
+
+        p {
             color: #bbccdd;
         }
 
@@ -109,7 +111,8 @@ $BASE_URL = getBaseUrl();
 
         .info-actors b {
             color: #ddeeff;
-        } 
+        }
+
         @media screen and (max-width: 600px) {
             .info-container {
                 grid-template-columns: auto;
@@ -138,14 +141,25 @@ $BASE_URL = getBaseUrl();
                 <h3 class="info-meta"><?= $info['year'] . ' • ' . $info['audio'] . ' • ' . $info['quality'] . ' • ' . $info['size'] ?></h3>
                 <h3 class="info-genres"><?= $info['genres'] ?></h3>
                 <div class="info-actors"><b>Actors:</b> <?= $info['actors'] ?></div>
-                <div class="download-btn-row">
-                    <a class="download-btn" href="<?= $downloadData['url'] ?>">Download</a>
-                    <form class="" action="./player" method="post">
-                        <input type="hidden" name="src" value="<?= $downloadData['url'] ?>">
-                        <button type="submit" class="download-btn">Play Online</button>
-                    </form>
-                </div>
-                <span class="info-note"><b>Note: </b>In case of error, come back and re-click on download button.</span>
+                <?php
+                if ($downloadData != null) {
+                ?>
+                    <div class="download-btn-row">
+                        <a class="download-btn" href="<?= $downloadData['url'] ?>">Download</a>
+                        <form class="" action="./player" method="post">
+                            <input type="hidden" name="src" value="<?= $downloadData['url'] ?>">
+                            <button type="submit" class="download-btn">Play Online</button>
+                        </form>
+                    </div>
+                    <span class="info-note"><b>Note: </b>In case of error, come back and re-click on download button.</span>
+                <?php
+                } else {
+                ?>
+                    <br>
+                    <h2 class="info-meta">Movie Coming Soon</h2>
+                <?php
+                }
+                ?>
             </div>
 
         </div>
@@ -173,12 +187,6 @@ $BASE_URL = getBaseUrl();
                     ?>
                     <br>
                     <br>
-                <?php
-                } else {
-                ?>
-                    <div class="center-div">
-                        <h2>Movie Coming Soon</h2>
-                    </div>
                 <?php
                 }
                 ?>
