@@ -69,7 +69,7 @@ class RenderUI
         ?>
         <nav id="toolbar">
             <div class="container">
-                <div>LOGO</div>
+                <div>We Are Great Site</div>
                 <div class="navigation">
                     <div>
                         <form class="search" action="./" method="GET">
