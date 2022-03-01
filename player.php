@@ -18,10 +18,6 @@ $src = $_POST['src']
             display: block;
             overflow: hidden;
         }
-
-        video {
-            max-height: 480px;
-        }
     </style>
 </head>
 
