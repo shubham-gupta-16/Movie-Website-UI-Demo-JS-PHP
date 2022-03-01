@@ -11,7 +11,7 @@ $src = $_POST['src']
 <html lang="en">
 
 <head>
-    <?php RenderUI::headComponents('Player', './', ['main.css', 'nav.css']); ?>
+    <?php RenderUI::headComponents('Player', './', ['style.css', 'nav.css']); ?>
     <style>
         .video-container {
             background-color: black;

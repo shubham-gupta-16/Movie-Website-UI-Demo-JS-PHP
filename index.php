@@ -29,7 +29,7 @@ if ($pageData == null) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php RenderUI::headComponents('Home Page', './', ['main.css', 'articles.css', 'nav.css']); ?>
+    <?php RenderUI::headComponents('Home Page', './', ['style.css', 'articles.css', 'nav.css']); ?>
     <style>
         .paginate-div {
             display: flex;

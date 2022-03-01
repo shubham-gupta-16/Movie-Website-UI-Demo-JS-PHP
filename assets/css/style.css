@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&family=Satisfy&display=swap');
 
 * {
     box-sizing: border-box;
@@ -9,6 +9,19 @@
 
 img {
     vertical-align: middle;
+}
+
+p {
+    color: #bbccdd;
+}
+
+.light-text {
+    color: #ccddee;
+}
+
+.logo {
+    font-family: 'Satisfy', cursive;
+    font-size: 20px;
 }
 
 body {
@@ -30,6 +43,10 @@ footer {
 
 a {
     text-decoration: none;
+}
+
+a.link {
+    color: #0099ff;
 }
 
 .main-page {

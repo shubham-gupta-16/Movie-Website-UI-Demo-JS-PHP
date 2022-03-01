@@ -31,7 +31,9 @@ class RenderUI
     ?>
         <footer>
             <center>
-                <h4>This website was created for educational purpose. It uses the data of 123MKV. We never promote piracy of copyright content.</h4><span>Developer: Shubham Gupta</span>
+                <p>This website was created for educational purpose. It uses the data of 123MKV. We never promote piracy of copyright content.</p>
+                <span><b>Developer:</b> <span>Shubham Gupta</span> | <a target="_blank" class="link" href="https://github.com/shubham-gupta-16">Github</a> | <a target="_blank" class="link" href="https://www.linkedin.com/in/shubham-gupta-16-in/">Linked In</a></span>
+                <div style="margin-top: 5px;">Source Code: <a target="_blank" class="link" href="https://github.com/shubham-gupta-16/123MKV-AdFree-Website-JSOUP-PHP">https://github.com/shubham-gupta-16/123MKV-AdFree-Website-JSOUP-PHP</a></div>
             </center>
         </footer>
         <?php
@@ -69,7 +71,7 @@ class RenderUI
         ?>
         <nav id="toolbar">
             <div class="container">
-                <div>We Are Great Site</div>
+                <div class="logo">We Are Great Site</div>
                 <div class="navigation">
                     <div>
                         <form class="search" action="./" method="GET">

@@ -41,7 +41,17 @@ function getDocumentInfo(string $uri): ?array
         return null;
     }
 
-    $result = array();
+    $result = [
+        'genres'=>null,
+        'quality'=>null,
+        'audio'=>null,
+        'name'=>null,
+        'year'=>null,
+        'size'=>null,
+        'country'=>null,
+        'actors'=>null,
+        'info'=>[],
+    ];
 
     $mPage = str_get_html($response);
     if ($mPage == null) {
@@ -91,7 +101,7 @@ function getDocumentInfo(string $uri): ?array
     $tokenParams = [];
 
     foreach ($mPage->find('input[type=hidden]') as $input) {
-        if ($input->value == '#') {
+        if ($input->name == 'fname' && $input->value == '#') {
             $tokenParams = null;
             break;
         }

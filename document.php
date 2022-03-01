@@ -27,7 +27,7 @@ $BASE_URL = getBaseUrl();
 <html lang="en">
 
 <head>
-    <?php RenderUI::headComponents('Document', './', ['main.css', 'articles.css', 'nav.css']); ?>
+    <?php RenderUI::headComponents('Document', './', ['style.css', 'articles.css', 'nav.css']); ?>
     <style>
         img.screenshot {
             width: 100%;
@@ -82,34 +82,34 @@ $BASE_URL = getBaseUrl();
             color: #bbccdd;
         }
 
-        h1,
-        h2,
-        h3,
-        h4 {
+        h1.info,
+        h2.info,
+        h3.info,
+        h4.info {
             margin: 0;
         }
 
-        h1.title {
+        h1.info.title {
             font-size: 34px;
         }
 
-        .info-meta {
+        .info.meta {
             color: #bbccdd;
         }
 
-        .info-genres {
+        .info.genres {
             margin-top: 18px;
             color: #ddeeff;
             font-size: 16px;
         }
 
-        .info-actors {
+        .info.actors {
             margin-top: 6px;
             color: #aabbcc;
             font-style: normal;
         }
 
-        .info-actors b {
+        .info.actors b {
             color: #ddeeff;
         }
 
@@ -137,10 +137,10 @@ $BASE_URL = getBaseUrl();
                 </div>
             </div>
             <div>
-                <h1 class="title"><?= $info['name'] ?></h1>
-                <h3 class="info-meta"><?= $info['year'] . ' • ' . $info['audio'] . ' • ' . $info['quality'] . ' • ' . $info['size'] ?></h3>
-                <h3 class="info-genres"><?= $info['genres'] ?></h3>
-                <div class="info-actors"><b>Actors:</b> <?= $info['actors'] ?></div>
+                <h1 class="info title"><?= $info['name'] ?></h1>
+                <h3 class="info meta"><?= $info['year'] . ' • ' . $info['audio'] . ' • ' . $info['quality'] . ' • ' . $info['size'] ?></h3>
+                <h3 class="info genres"><?= $info['genres'] ?></h3>
+                <div class="info actors"><b>Actors:</b> <?= $info['actors'] ?></div>
                 <?php
                 if ($downloadData != null) {
                 ?>
@@ -156,7 +156,7 @@ $BASE_URL = getBaseUrl();
                 } else {
                 ?>
                     <br>
-                    <h2 class="info-meta">Movie Coming Soon</h2>
+                    <h2 class="info meta">Movie Coming Soon</h2>
                 <?php
                 }
                 ?>
