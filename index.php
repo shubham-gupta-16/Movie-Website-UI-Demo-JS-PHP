@@ -61,7 +61,6 @@ $pageData = ['documents'=>[], 'pages'=>1];
         const PARAM_TYPE = <?=$type == null? 'null': "'$type'"?>;
         const PARAM_VALUE = <?=$value == null? 'null': "'$value'"?>;
         const PARAM_PAGE = <?=$page ?: 1?>;
-        alert(PARAM_TYPE + PARAM_VALUE + PARAM_PAGE);
     </script>
 </head>
 
