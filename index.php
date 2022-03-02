@@ -21,10 +21,8 @@ if (isset($_GET['category']) && strlen($_GET['category']) > 0) {
     $value = $_GET['s'];
     $type = 's';
 }
-$pageData = getDocumentsInPage($page, $type, $value);
-if ($pageData == null) {
-    header('Location: ' . './error/500');
-}
+$pageData = ['documents'=>[], 'pages'=>1];
+// $pageData = getDocumentsInPage($page, $type, $value);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +57,12 @@ if ($pageData == null) {
             background-color: #000511;
         }
     </style>
+    <script>
+        const PARAM_TYPE = <?=$type == null? 'null': "'$type'"?>;
+        const PARAM_VALUE = <?=$value == null? 'null': "'$value'"?>;
+        const PARAM_PAGE = <?=$page ?: 1?>;
+        alert(PARAM_TYPE + PARAM_VALUE + PARAM_PAGE);
+    </script>
 </head>
 
 <body>
@@ -66,7 +70,7 @@ if ($pageData == null) {
     <div class="container main-page">
 
         <!-- search input -->
-        <div class="article-grid">
+        <div id="document-container" class="article-grid">
 
             <?php
             foreach ($pageData['documents'] as $document)
@@ -76,7 +80,8 @@ if ($pageData == null) {
 
         <?php RenderUI::pagination($pageData['pages'], $page, $type, $value); ?>
     </div>
-    <?php RenderUI::footer(['nav.js']); ?>
+    <?php RenderUI::footer(['nav.js', 'api.js', 'index.js']); ?>
+
 </body>
 
 </html>
