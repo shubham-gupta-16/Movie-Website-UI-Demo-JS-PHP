@@ -39,6 +39,15 @@ $pageData = ['documents' => [], 'pages' => 1];
             justify-content: center;
             align-items: center;
         }
+        #more-loader p{
+            text-align: center;
+        }
+        #main-loader{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
         .paginate-div {
             display: flex;
@@ -67,6 +76,9 @@ $pageData = ['documents' => [], 'pages' => 1];
         .paginate-div>a.active {
             background-color: #000511;
         }
+        .loader-shift{
+            padding-left: 17px;
+        }
     </style>
     <script>
         const PARAM_TYPE = <?= $type == null ? 'null' : "'$type'" ?>;
@@ -75,10 +87,10 @@ $pageData = ['documents' => [], 'pages' => 1];
 </head>
 
 <body>
-    <div id="doc-wrapper" style="height: 100vh; overflow:auto">
+    <div id="doc-wrapper" style="height: calc(100vh - 55px); overflow:auto; margin-top:55px">
 
         <?php RenderUI::navbar($type, $value); ?>
-        <div class="container main-page">
+        <div class="container main-page" style="margin-top: 45px;">
 
             <!-- search input -->
             <div id="document-container" class="article-grid">
@@ -90,13 +102,23 @@ $pageData = ['documents' => [], 'pages' => 1];
             </div>
 
             <div id="more-loader">
-                <div class="cssload-contain">
+                <div class="cssload-contain loader-shift">
                     <div class="cssload-dot"></div>
                     <div class="cssload-dot"></div>
                     <div class="cssload-dot"></div>
                     <div class="cssload-dot"></div>
                     <div class="cssload-dot"></div>
                 </div>
+            </div>
+            <div id="main-loader">
+                <div class="cssload-contain loader-shift">
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                </div>
+                <p class="center-div">Loading</p>
             </div>
         </div>
         <?php RenderUI::footer(['nav.js', 'api.js', 'index.js']); ?>

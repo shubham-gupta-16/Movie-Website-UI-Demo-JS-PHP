@@ -1,5 +1,6 @@
 const docContainer = document.getElementById('document-container');
 const moreLoader = document.getElementById("more-loader");
+const mainLoader = document.getElementById("main-loader");
 
 console.log(renderArticleCard({
     'uri': '123',
@@ -18,7 +19,7 @@ let wrapper = document.getElementById("doc-wrapper");
     console.log(wrapper);
     wrapper.addEventListener("scroll", () => {
         if (wrapper.scrollTop + wrapper.offsetHeight > docContainer.offsetHeight && !isLoading && totalPages >= globalPage) {
-            fetch(globalPage, PARAM_TYPE, PARAM_VALUE)
+            fetch(PARAM_TYPE, PARAM_VALUE)
         }
     }, false);
 
@@ -27,24 +28,28 @@ let wrapper = document.getElementById("doc-wrapper");
 // content.innerHTML = more;
 
 
-fetch(1, PARAM_TYPE, PARAM_VALUE)
+fetch(PARAM_TYPE, PARAM_VALUE)
 
 
-function fetch(page, paramType, paramValue) {
+function fetch(paramType, paramValue) {
     isLoading = true
     var get = {
-        page: page
+        page: globalPage
     }
     if (paramType != null && paramValue != null) {
 
     }
     get[paramType] = paramValue
 
+    if (globalPage == 1) {
+        mainLoader.style.display = "block"
+    }
     requestAPI('', {
         get: get
     }, response => {
         console.log(response);
         totalPages = response.pages
+        mainLoader.style.display = "none"
         if (totalPages > globalPage) {
             moreLoader.style.display = "flex"
         } else {
