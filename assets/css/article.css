@@ -21,11 +21,12 @@
     background-position: center;
     background-size: cover;
     position: absolute;
+    opacity: 0;
     top: 0;
     bottom: 0;
     left: 0;
     transform: scale(1.01);
-    transition: transform 0.4s ease 0.1s;
+    transition: transform 0.4s ease 0.1s, opacity 0.6s ease;
     right: 0;
 }
 

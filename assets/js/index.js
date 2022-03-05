@@ -58,7 +58,8 @@ function fetch(paramType, paramValue) {
         globalPage++
 
         response.documents.forEach(element => {
-            docContainer.innerHTML += renderArticleCard(element)
+            // docContainer.innerHTML += renderArticleCard(element)
+            docContainer.appendChild(renderArticleCard(element))
             console.log(docContainer);
         });
         isLoading = false
@@ -70,14 +71,27 @@ function fetch(paramType, paramValue) {
 
 
 function renderArticleCard(data) {
-    return `<a href="./document?uri=${data['uri']}" class="">
-            <div class="doc-card">
-                <div style="background-image: url(${data['image']});"></div>
+    let html =  `<div class="doc-card">
+                <div></div>
                 <header>
                     <div class="d-name">${data['name']}</div>
                     <div>${data['year']}</div>
                 </header>
             </div>
-        </a>
         `
+    let doc = document.createElement('a')
+    doc.href = `./document?uri=${data['uri']}`
+    doc.innerHTML = html
+    loadImage(doc.firstChild.children[0], data['image']);
+    return doc
+}
+
+function loadImage(element, src) {
+    var image = new Image();
+    image.addEventListener('load', function () {
+        console.log(element);
+        element.style.backgroundImage = 'url(' + src + ')';
+        element.style.opacity = 1
+    });
+    image.src = src;
 }

@@ -20,7 +20,7 @@ if (isset($_GET['category']) && strlen($_GET['category']) > 0) {
 <html lang="en">
 
 <head>
-    <?php RenderUI::headComponents('Home Page', './', ['style.css', 'articles.css', 'nav.css', 'loader.css']); ?>
+    <?php RenderUI::headComponents('Home Page', './', ['style.css', 'article.css', 'nav.css', 'loader.css']); ?>
     <style>
         #more-loader {
             display: flex;
