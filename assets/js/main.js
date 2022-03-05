@@ -81,6 +81,7 @@ function renderArticleCard(data) {
         `
     let doc = document.createElement('a')
     doc.href = `./document?uri=${data['uri']}`
+    doc.target = '_blank'
     doc.innerHTML = html
     loadImage(doc.firstChild.children[0], data['image']);
     return doc
