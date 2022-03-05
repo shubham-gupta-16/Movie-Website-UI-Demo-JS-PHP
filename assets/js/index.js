@@ -1,4 +1,5 @@
 const docContainer = document.getElementById('document-container');
+const moreLoader = document.getElementById("more-loader");
 
 console.log(renderArticleCard({
     'uri': '123',
@@ -43,8 +44,14 @@ function fetch(page, paramType, paramValue) {
         get: get
     }, response => {
         console.log(response);
-        globalPage++
         totalPages = response.pages
+        if (totalPages > globalPage) {
+            moreLoader.style.display = "flex"
+        } else {
+            moreLoader.style.display = "none"
+        }
+        globalPage++
+
         response.documents.forEach(element => {
             docContainer.innerHTML += renderArticleCard(element)
             console.log(docContainer);
