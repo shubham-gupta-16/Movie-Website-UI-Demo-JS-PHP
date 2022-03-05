@@ -100,64 +100,6 @@ class RenderUI
         </nav>
         <?php
     }
-    public static function pagination(int $pages, int $page, ?string $type, ?string $value)
-    {
-        if ($pages > 1) {
-        ?>
-            <div class="paginate-div">
-                <?php
-                if ($page > 1) {
-                ?>
-                    <a href="<?= self::getHref($page - 1, $type, $value) ?>">PREV</a>
-                <?php
-                }
-                ?>
-                <a href="<?= self::getHref(1, $type, $value) ?>" class="<?php if ($page == 1) echo 'active' ?>">1</a>
-                <?php
-                if ($page > 4) {
-                ?>
-                    <span>...</span>
-                <?php
-                }
-                ?>
-                <?php
-                $row = $pages <= 4 ? $pages : ($page > 4 ? $page : 4);
-                $startPoint = ($page > 4 ? $page - 2 : 2);
-                for ($i = $startPoint; $i <= $row; $i++) {
-                ?>
-                    <a href="<?= self::getHref($i, $type, $value) ?>" class="<?php if ($page == $i) echo 'active' ?>">
-                        <?= $i; ?>
-                    </a>
-                <?php
-                }
-                ?>
-                <?php
-                if ($pages > 5 && $page < $pages - 1) {
-                ?>
-                    <span>...</span>
-                <?php
-                }
-                ?>
-                <?php
-                if ($pages > 4 && $page < $pages) {
-                ?>
-                    <a href="<?= self::getHref($pages, $type, $value) ?>" class="<?php if ($page == $pages) echo 'active' ?>">
-                        <?= $pages ?>
-                    </a>
-                <?php
-                }
-                ?>
-                <?php
-                if ($page < $pages) {
-                ?>
-                    <a href="<?= self::getHref($page + 1, $type, $value) ?>">NEXT</a>
-                <?php
-                }
-                ?>
-            </div>
-        <?php
-        }
-    }
 
     // small components
 
