@@ -1,0 +1,135 @@
+.cssload-contain {
+    height: 8px;
+    width: 93px;
+    margin: auto;
+}
+
+.cssload-dot {
+    float: left;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0);
+    background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.3), transparent), radial-gradient(rgb(153, 170, 187), rgb(187, 204, 221));
+    -o-radial-gradient:(rgb(153, 170, 187), rgb(187, 204, 221));
+    -ms-radial-gradient:(rgb(153, 170, 187), rgb(187, 204, 221));
+    -webkit-radial-gradient:(rgb(153, 170, 187), rgb(187, 204, 221));
+    -moz-radial-gradient:(rgb(153, 170, 187), rgb(187, 204, 221));
+    background-position: top center;
+    margin: 0 1.5px;
+    animation: cssload-bounce 0.52s infinite ease alternate;
+    -o-animation: cssload-bounce 0.52s infinite ease alternate;
+    -ms-animation: cssload-bounce 0.52s infinite ease alternate;
+    -webkit-animation: cssload-bounce 0.52s infinite ease alternate;
+    -moz-animation: cssload-bounce 0.52s infinite ease alternate;
+}
+
+.cssload-dot:nth-child(1) {
+    animation-delay: -0.09s;
+    -o-animation-delay: -0.09s;
+    -ms-animation-delay: -0.09s;
+    -webkit-animation-delay: -0.09s;
+    -moz-animation-delay: -0.09s;
+}
+
+.cssload-dot:nth-child(2) {
+    animation-delay: -0.17s;
+    -o-animation-delay: -0.17s;
+    -ms-animation-delay: -0.17s;
+    -webkit-animation-delay: -0.17s;
+    -moz-animation-delay: -0.17s;
+}
+
+.cssload-dot:nth-child(3) {
+    animation-delay: -0.26s;
+    -o-animation-delay: -0.26s;
+    -ms-animation-delay: -0.26s;
+    -webkit-animation-delay: -0.26s;
+    -moz-animation-delay: -0.26s;
+}
+
+.cssload-dot:nth-child(4) {
+    animation-delay: -0.35s;
+    -o-animation-delay: -0.35s;
+    -ms-animation-delay: -0.35s;
+    -webkit-animation-delay: -0.35s;
+    -moz-animation-delay: -0.35s;
+}
+
+.cssload-dot:nth-child(5) {
+    animation-delay: -0.43s;
+    -o-animation-delay: -0.43s;
+    -ms-animation-delay: -0.43s;
+    -webkit-animation-delay: -0.43s;
+    -moz-animation-delay: -0.43s;
+}
+
+.cssload-dot:nth-child(6) {
+    animation-delay: -0.52s;
+    -o-animation-delay: -0.52s;
+    -ms-animation-delay: -0.52s;
+    -webkit-animation-delay: -0.52s;
+    -moz-animation-delay: -0.52s;
+}
+
+
+
+@keyframes cssload-bounce {
+    0% {
+        transform: translateY(0);
+        box-shadow: 0 1.5px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        transform: translateY(-31px);
+        box-shadow: 0 70px 9px rgba(153, 170, 187, 0.1);
+    }
+}
+
+@-o-keyframes cssload-bounce {
+    0% {
+        -o-transform: translateY(0);
+        box-shadow: 0 1.5px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        -o-transform: translateY(-31px);
+        box-shadow: 0 70px 9px rgba(153, 170, 187, 0.1);
+    }
+}
+
+@-ms-keyframes cssload-bounce {
+    0% {
+        -ms-transform: translateY(0);
+        box-shadow: 0 1.5px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        -ms-transform: translateY(-31px);
+        box-shadow: 0 70px 9px rgba(153, 170, 187, 0.1);
+    }
+}
+
+@-webkit-keyframes cssload-bounce {
+    0% {
+        -webkit-transform: translateY(0);
+        box-shadow: 0 1.5px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        -webkit-transform: translateY(-31px);
+        box-shadow: 0 70px 9px rgba(153, 170, 187, 0.1);
+    }
+}
+
+@-moz-keyframes cssload-bounce {
+    0% {
+        -moz-transform: translateY(0);
+        box-shadow: 0 1.5px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        -moz-transform: translateY(-31px);
+        box-shadow: 0 70px 9px rgba(153, 170, 187, 0.1);
+    }
+}

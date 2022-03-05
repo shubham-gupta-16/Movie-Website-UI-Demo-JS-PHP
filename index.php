@@ -21,14 +21,25 @@ if (isset($_GET['category']) && strlen($_GET['category']) > 0) {
     $value = $_GET['s'];
     $type = 's';
 }
-$pageData = ['documents'=>[], 'pages'=>1];
+$pageData = ['documents' => [], 'pages' => 1];
 // $pageData = getDocumentsInPage($page, $type, $value);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <?php RenderUI::headComponents('Home Page', './', ['style.css', 'articles.css', 'nav.css']); ?>
+    <?php RenderUI::headComponents('Home Page', './', ['style.css', 'articles.css', 'nav.css', 'loader.css']); ?>
     <style>
+        #more-loader {
+            display: flex;
+            display: none;
+            width: 100%;
+            margin-top: 40px;
+            height: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
         .paginate-div {
             display: flex;
             justify-content: center;
@@ -58,28 +69,39 @@ $pageData = ['documents'=>[], 'pages'=>1];
         }
     </style>
     <script>
-        const PARAM_TYPE = <?=$type == null? 'null': "'$type'"?>;
-        const PARAM_VALUE = <?=$value == null? 'null': "'$value'"?>;
-        const PARAM_PAGE = <?=$page ?: 1?>;
+        const PARAM_TYPE = <?= $type == null ? 'null' : "'$type'" ?>;
+        const PARAM_VALUE = <?= $value == null ? 'null' : "'$value'" ?>;
     </script>
 </head>
 
 <body>
-    <?php RenderUI::navbar($type, $value); ?>
-    <div class="container main-page">
+    <div id="doc-wrapper" style="height: 100vh; overflow:auto">
 
-        <!-- search input -->
-        <div id="document-container" class="article-grid">
+        <?php RenderUI::navbar($type, $value); ?>
+        <div class="container main-page">
 
-            <?php
-            foreach ($pageData['documents'] as $document)
-                RenderUI::article($document);
-            ?>
+            <!-- search input -->
+            <div id="document-container" class="article-grid">
+
+                <?php
+                foreach ($pageData['documents'] as $document)
+                    RenderUI::article($document);
+                ?>
+            </div>
+
+            <div id="more-loader">
+                <div class="cssload-contain">
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                </div>
+            </div>
         </div>
-
-        <?php RenderUI::pagination($pageData['pages'], $page, $type, $value); ?>
+        <?php RenderUI::footer(['nav.js', 'api.js', 'index.js']); ?>
     </div>
-    <?php RenderUI::footer(['nav.js', 'api.js', 'index.js']); ?>
+
 
 </body>
 

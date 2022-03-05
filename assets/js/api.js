@@ -1,4 +1,4 @@
-const BASE_URL_SEP = '/api/'
+const BASE_URL_SEP = '/123MKV%20AdFree%20Website%20-%20Jsoup%20in%20PHP/api/'
 
 function requestAPI(loc, { post, get }, successCallback, errorCallback) {
     console.log(window.location.origin + BASE_URL_SEP + loc);
@@ -15,8 +15,10 @@ function requestAPI(loc, { post, get }, successCallback, errorCallback) {
 }
 
 function requestAJAX(url, { post, get }, successCallback, errorCallback) {
+    const target = new URL(url)
+    target.search = new URLSearchParams(get).toString()
     var request = new XMLHttpRequest();
-    request.open("POST", url);
+    request.open("POST", target);
     request.addEventListener("progress", function (evt) {
         if (evt.lengthComputable) {
             var percentComplete = evt.loaded / evt.total;
