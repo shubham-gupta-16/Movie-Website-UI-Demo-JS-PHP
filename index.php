@@ -80,7 +80,7 @@ if (isset($_GET['category']) && strlen($_GET['category']) > 0) {
                 <p class="center-div">Loading</p>
             </div>
         </div>
-        <?php RenderUI::footer(['nav.js', 'api.js', 'index.js']); ?>
+        <?php RenderUI::footer(['nav.js', 'api.js', 'main.js']); ?>
     </div>
 
 
