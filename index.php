@@ -51,8 +51,7 @@ if (isset($_GET['category']) && strlen($_GET['category']) > 0) {
 </head>
 
 <body>
-    <div id="doc-wrapper" style="height: calc(100vh - 55px); overflow:auto; margin-top:55px">
-
+    <div id="doc-wrapper">
         <?php RenderUI::navbar($type, $value); ?>
         <div class="container main-page" style="margin-top: 45px;">
 

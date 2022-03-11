@@ -39,7 +39,7 @@ class RenderUI
         <?php
         if ($js != null) {
             foreach ($js as $j) {
-                echo '<script src="' . $basePath . 'assets/js/' . $j . '"></script> ';
+                echo '<script src="' . $basePath . 'assets/javascript/' . $j . '"></script> ';
             }
         }
     }

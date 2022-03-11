@@ -2,28 +2,21 @@ const docContainer = document.getElementById('document-container');
 const moreLoader = document.getElementById("more-loader");
 const mainLoader = document.getElementById("main-loader");
 
-console.log(renderArticleCard({
-    'uri': '123',
-    'image': 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-    'name': 'Google',
-    'year': '2019'
-}));
-
 var globalPage = 1
 var totalPages = 1
 var isLoading = true
 
 
-let wrapper = document.getElementById("doc-wrapper");
-(function () {
-    console.log(wrapper);
-    wrapper.addEventListener("scroll", () => {
-        if (wrapper.scrollTop + wrapper.offsetHeight > docContainer.offsetHeight && !isLoading && totalPages >= globalPage) {
-            fetch(PARAM_TYPE, PARAM_VALUE)
-        }
-    }, false);
+window.addEventListener("scroll", () => {
+    tryFetchMore()
+}, false);
 
-})();
+function tryFetchMore() {
+    if (window.scrollY + window.innerHeight - 20 > docContainer.offsetHeight && !isLoading && totalPages >= globalPage) {
+        console.log("fetch more")
+        fetch(PARAM_TYPE, PARAM_VALUE)
+    }
+}
 // var more = '<div style="height:1000px; background:#EEE;"></div>';
 // content.innerHTML = more;
 
@@ -47,7 +40,6 @@ function fetch(paramType, paramValue) {
     requestAPI('', {
         get: get
     }, response => {
-        console.log(response);
         totalPages = response.pages
         mainLoader.style.display = "none"
         if (totalPages > globalPage) {
@@ -60,9 +52,9 @@ function fetch(paramType, paramValue) {
         response.documents.forEach(element => {
             // docContainer.innerHTML += renderArticleCard(element)
             docContainer.appendChild(renderArticleCard(element))
-            console.log(docContainer);
         });
         isLoading = false
+        tryFetchMore()
     }, (code, message) => {
         alert(message)
         isLoading = false
@@ -71,7 +63,7 @@ function fetch(paramType, paramValue) {
 
 
 function renderArticleCard(data) {
-    let html =  `<div class="doc-card">
+    let html = `<div class="doc-card">
                 <div></div>
                 <header>
                     <div class="d-name">${data['name']}</div>
@@ -90,7 +82,6 @@ function renderArticleCard(data) {
 function loadImage(element, src) {
     var image = new Image();
     image.addEventListener('load', function () {
-        console.log(element);
         element.style.backgroundImage = 'url(' + src + ')';
         element.style.opacity = 1
     });
