@@ -53,7 +53,7 @@ if (isset($_GET['category']) && strlen($_GET['category']) > 0) {
 <body>
     <div id="doc-wrapper">
         <?php RenderUI::navbar($type, $value); ?>
-        <div class="container main-page" style="margin-top: 45px;">
+        <div class="container main-page">
 
             <!-- search input -->
             <div id="document-container" class="article-grid">
