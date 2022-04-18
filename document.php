@@ -131,7 +131,7 @@ $BASE_URL = getBaseUrl();
         <div class="info-container small-container">
             <div class="info-img">
                 <div class="doc-card">
-                    <div style="background-image: url(<?= $info['image'] ?>);"></div>
+                    <div style="background-image: url(<?= $info['image'] ?>); opacity:1"></div>
                 </div>
             </div>
             <div>
