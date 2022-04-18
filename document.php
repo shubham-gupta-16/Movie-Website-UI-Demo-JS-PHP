@@ -128,6 +128,44 @@ $BASE_URL = getBaseUrl();
             }
         }
 
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 140px;
+            background-color: #567;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #567 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
         .video-container {
             background-color: black;
             display: block;
@@ -168,10 +206,13 @@ $BASE_URL = getBaseUrl();
                     ?>
                         <div class="download-btn-row">
                             <a class="download-btn" href="<?= $info['url'] ?>">Download</a>
-                            <form class="" action="./player" method="post">
-                                <input type="hidden" name="src" value="<?= $info['url'] ?>">
-                                <!-- <button type="submit" class="download-btn">Play Online</button> -->
-                            </form>
+                            <div class="tooltip">
+                                <button class="download-btn" onclick="copyLink('<?= $info['url'] ?>')" onmouseout="outFunc()"><span class="tooltiptext" id="myTooltip">Copy to clipboard</span>Copy Link</button>
+                            </div>
+                            <!-- <form class="" action="./player" method="post"> -->
+                            <!-- <input type="hidden" name="src" value=""> -->
+                            <!-- <button type="submit" class="download-btn">Play Online</button> -->
+                            <!-- </form> -->
                         </div>
                         <span class="info-note"><b>Note: </b>In case of error, come back and re-click on download button.</span>
                     <?php
@@ -232,6 +273,17 @@ $BASE_URL = getBaseUrl();
     </div>
     <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
     <script>
+        function outFunc() {
+            var tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Copy to clipboard";
+        }
+
+        function copyLink(copyText) {
+            navigator.clipboard.writeText(copyText);
+
+            var tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Link Copied!";
+        }
         let player = videojs('my-video', {
             fluid: true
         });
