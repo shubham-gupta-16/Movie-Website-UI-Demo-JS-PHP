@@ -5,31 +5,30 @@ require_once(__DIR__ . '/base.php');
 const ENCRYPT_KEY = "__^!@XQ@z#$&*^%%Y&$&*^__";
 const ENCRYPT_METHOD = "AES-256-ECB";
 
-function getDownloadLink(string $token)
+function getDownloadLink(string $token, array &$result): bool
 {
     $credentials = (array) json_decode(decrypt($token));
     $response = getCurlData('start-downloading/', $credentials);
     if ($response == null)
-        return null;
+        return false;
     if ($response == '') {
-        return null;
+        return false;
     }
     $BASE_URL = getBaseUrl();
     $downloadPage = str_get_html($response);
     if ($downloadPage == null) {
-        return null;
+        return false;
     }
-    $result = [];
     $downloadAnchor = $downloadPage->find('a[onclick=open_win()]', 0);
     if ($downloadAnchor == null) {
-        return null;
+        return false;
     }
     $result['url'] = $downloadAnchor->href;
     foreach ($downloadPage->find('img[src^=/screenshot]') as $screenshot) {
         $imageUrl = $BASE_URL . $screenshot->src;
         $result['screenshots'][] = $imageUrl;
     }
-    return $result;
+    return true;
 }
 
 function getDocumentInfo(string $uri): ?array
@@ -107,9 +106,23 @@ function getDocumentInfo(string $uri): ?array
         }
         $tokenParams[$input->name] = $input->value;
     }
+    $token = null;
     if ($tokenParams != null) {
-        $result['token'] = encrypt(json_encode($tokenParams));
+        $token = encrypt(json_encode($tokenParams));
     }
+    if ($token == null) {
+        $directAnc = $mPage->find('a[onclick=open_win()]', 0);
+        if ($directAnc != null) {
+            $result['url'] = $directAnc->href;
+        }
+    } else {
+        $result['token'] = $token;
+    }
+    /**  
+     * this will return either url or token or none of them.
+     * In case of token, to get url and screenshots, call getDownlodLink(token, &result) function.
+     * In case of none of them, movie isnt downloadable
+    */
     return $result;
 }
 

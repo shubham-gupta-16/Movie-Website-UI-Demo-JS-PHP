@@ -11,11 +11,9 @@ $info = getDocumentInfo($uri, null);
 if ($info == null) {
     header('Location: ' . './error/500');
 }
-$downloadData = null;
 
 if (isset($info['token'])) {
-    $downloadData = getDownloadLink($info['token']);
-    if ($downloadData == null) {
+    if (getDownloadLink($info['token'], $info) == false) {
         header('Location: ' . './error/500');
     }
 }
@@ -27,7 +25,7 @@ $BASE_URL = getBaseUrl();
 <html lang="en">
 
 <head>
-    <?php RenderUI::headComponents('Document', './', ['style.css', 'articles.css', 'nav.css']); ?>
+    <?php RenderUI::headComponents('Document', './', ['style.css', 'article.css', 'nav.css']); ?>
     <style>
         img.screenshot {
             width: 100%;
@@ -142,12 +140,12 @@ $BASE_URL = getBaseUrl();
                 <h3 class="info genres"><?= $info['genres'] ?></h3>
                 <div class="info actors"><b>Actors:</b> <?= $info['actors'] ?></div>
                 <?php
-                if ($downloadData != null) {
+                if (isset($info['url'])) {
                 ?>
                     <div class="download-btn-row">
-                        <a class="download-btn" href="<?= $downloadData['url'] ?>">Download</a>
+                        <a class="download-btn" href="<?= $info['url'] ?>">Download</a>
                         <form class="" action="./player" method="post">
-                            <input type="hidden" name="src" value="<?= $downloadData['url'] ?>">
+                            <input type="hidden" name="src" value="<?= $info['url'] ?>">
                             <button type="submit" class="download-btn">Play Online</button>
                         </form>
                     </div>
@@ -174,13 +172,13 @@ $BASE_URL = getBaseUrl();
                 <br>
 
                 <?php
-                if ($downloadData != null) {
+                if (isset($info['screenshots'])) {
                 ?>
 
                     <h2>Screenshots:</h2>
 
                     <?php
-                    foreach ($downloadData['screenshots'] as $screenshot) {
+                    foreach ($info['screenshots'] as $screenshot) {
                         echo '<div class="center-div"><img src="' . $screenshot . '" class="screenshot"></div>';
                     }
 

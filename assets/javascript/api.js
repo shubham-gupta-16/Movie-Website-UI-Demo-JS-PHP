@@ -1,3 +1,4 @@
+// const BASE_URL_SEP = '/123MKV%20AdFree%20Website%20-%20Jsoup%20in%20PHP/api/'
 const BASE_URL_SEP = '/api/'
 
 function requestAPI(loc, { post, get }, successCallback, errorCallback) {
