@@ -2,7 +2,7 @@
 
 class RenderUI
 {
-    public static function headComponents(string $title, string $basePath = './', ?array $css = null, ?array $js = null)
+    public static function headComponents(string $title, string $basePath = './', ?array $css = null, ?array $js = null, string $extras = '')
     {
 ?>
 
@@ -21,6 +21,7 @@ class RenderUI
                 echo '<script src="' . $basePath . 'assets/js/' . $j . '"></script> ';
             }
         }
+        echo $extras;
         ?>
 
     <?php
