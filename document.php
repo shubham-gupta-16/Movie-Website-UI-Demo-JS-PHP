@@ -25,7 +25,13 @@ $BASE_URL = getBaseUrl();
 <html lang="en">
 
 <head>
-    <?php RenderUI::headComponents('Document', './', ['style.css', 'article.css', 'nav.css']); ?>
+    <?php RenderUI::headComponents(
+        'Document',
+        './',
+        ['style.css', 'article.css', 'nav.css'],
+        null,
+        '<link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />'
+    ); ?>
     <style>
         img.screenshot {
             width: 100%;
@@ -121,6 +127,23 @@ $BASE_URL = getBaseUrl();
                 /* display: none; */
             }
         }
+
+        .video-container {
+            background-color: black;
+            display: block;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .vjs-big-play-button {
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            border-radius: 1.6em !important;
+            height: 1.6em !important;
+            width: 1.6em !important;
+        }
     </style>
 </head>
 
@@ -128,38 +151,54 @@ $BASE_URL = getBaseUrl();
 
     <?php RenderUI::navbar(); ?>
     <div class="container main-page">
-        <div class="info-container small-container">
-            <div class="info-img">
-                <div class="doc-card">
-                    <div style="background-image: url(<?= $info['image'] ?>); opacity:1"></div>
-                </div>
-            </div>
-            <div>
-                <h1 class="info title"><?= $info['name'] ?></h1>
-                <h3 class="info meta"><?= $info['year'] . ' • ' . $info['audio'] . ' • ' . $info['quality'] . ' • ' . $info['size'] ?></h3>
-                <h3 class="info genres"><?= $info['genres'] ?></h3>
-                <div class="info actors"><b>Actors:</b> <?= $info['actors'] ?></div>
-                <?php
-                if (isset($info['url'])) {
-                ?>
-                    <div class="download-btn-row">
-                        <a class="download-btn" href="<?= $info['url'] ?>">Download</a>
-                        <form class="" action="./player" method="post">
-                            <input type="hidden" name="src" value="<?= $info['url'] ?>">
-                            <button type="submit" class="download-btn">Play Online</button>
-                        </form>
+        <div class="small-container">
+            <div class="info-container">
+                <div class="info-img">
+                    <div class="doc-card">
+                        <div style="background-image: url(<?= $info['image'] ?>); opacity:1"></div>
                     </div>
-                    <span class="info-note"><b>Note: </b>In case of error, come back and re-click on download button.</span>
-                <?php
-                } else {
-                ?>
-                    <br>
-                    <h2 class="info meta">Movie Coming Soon</h2>
-                <?php
-                }
-                ?>
-            </div>
+                </div>
+                <div>
+                    <h1 class="info title"><?= $info['name'] ?></h1>
+                    <h3 class="info meta"><?= $info['year'] . ' • ' . $info['audio'] . ' • ' . $info['quality'] . ' • ' . $info['size'] ?></h3>
+                    <h3 class="info genres"><?= $info['genres'] ?></h3>
+                    <div class="info actors"><b>Actors:</b> <?= $info['actors'] ?></div>
+                    <?php
+                    if (isset($info['url'])) {
+                    ?>
+                        <div class="download-btn-row">
+                            <a class="download-btn" href="<?= $info['url'] ?>">Download</a>
+                            <form class="" action="./player" method="post">
+                                <input type="hidden" name="src" value="<?= $info['url'] ?>">
+                                <!-- <button type="submit" class="download-btn">Play Online</button> -->
+                            </form>
+                        </div>
+                        <span class="info-note"><b>Note: </b>In case of error, come back and re-click on download button.</span>
+                    <?php
+                    } else {
+                    ?>
+                        <br>
+                        <h2 class="info meta">Movie Coming Soon</h2>
+                    <?php
+                    }
+                    ?>
+                </div>
 
+            </div>
+            <?php
+            if (isset($info['url'])) {
+            ?>
+                <br>
+                <br>
+                <div class="video-container">
+                    <video id="my-video" class="video-js vjs-fluid" controls preload="auto" width="100%" height="100%" data-setup="{}">
+                        <source src="<?= $info['url']; ?>" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            <?php
+            }
+            ?>
         </div>
         <br>
         <div class="small-container">
@@ -191,6 +230,12 @@ $BASE_URL = getBaseUrl();
         </div>
 
     </div>
+    <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
+    <script>
+        let player = videojs('my-video', {
+            fluid: true
+        });
+    </script>
     <?php RenderUI::footer(['nav.js']); ?>
 
 </body>
