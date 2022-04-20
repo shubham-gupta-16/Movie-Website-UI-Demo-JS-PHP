@@ -32,7 +32,7 @@ class RenderUI
     ?>
         <footer>
             <center>
-                <p>This website was created for educational purpose. It uses the data of 123MKV. We never promote piracy of copyright content.</p>
+                <p>This website was created for educational purpose. With this site you can get the basic info of any listed movie.</p>
                 <span><b>Developer:</b> <span>Shubham Gupta</span> | <a target="_blank" class="link" href="https://github.com/shubham-gupta-16">Github</a> | <a target="_blank" class="link" href="https://www.linkedin.com/in/shubham-gupta-16-in/">Linked In</a></span>
                 <div style="margin-top: 5px;">Source Code: <a target="_blank" class="link" href="https://github.com/shubham-gupta-16/123MKV-AdFree-Website-JSOUP-PHP">https://github.com/shubham-gupta-16/123MKV-AdFree-Website-JSOUP-PHP</a></div>
             </center>
