@@ -49,6 +49,8 @@ function getDocumentInfo(string $uri): ?array
         'size'=>null,
         'country'=>null,
         'actors'=>null,
+        'token'=>null,
+        'url'=>null,
         'info'=>[],
     ];
 
@@ -97,7 +99,7 @@ function getDocumentInfo(string $uri): ?array
     $relatedPosts = $mPage->find('div.related-posts', 0);
     $result['related'] = getDocuments($relatedPosts);
 
-    $tokenParams = [];
+    /* $tokenParams = [];
 
     foreach ($mPage->find('input[type=hidden]') as $input) {
         if ($input->name == 'fname' && $input->value == '#') {
@@ -105,8 +107,8 @@ function getDocumentInfo(string $uri): ?array
             break;
         }
         $tokenParams[$input->name] = $input->value;
-    }
-    $token = null;
+    } */
+    /* $token = null;
     if ($tokenParams != null) {
         $token = encrypt(json_encode($tokenParams));
     }
@@ -117,7 +119,7 @@ function getDocumentInfo(string $uri): ?array
         }
     } else {
         $result['token'] = $token;
-    }
+    } */
     /**  
      * this will return either url or token or none of them.
      * In case of token, to get url and screenshots, call getDownlodLink(token, &result) function.

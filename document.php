@@ -201,45 +201,11 @@ $BASE_URL = getBaseUrl();
                     <h3 class="info meta"><?= $info['year'] . ' • ' . $info['audio'] . ' • ' . $info['quality'] . ' • ' . $info['size'] ?></h3>
                     <h3 class="info genres"><?= $info['genres'] ?></h3>
                     <div class="info actors"><b>Actors:</b> <?= $info['actors'] ?></div>
-                    <?php
-                    if (isset($info['url'])) {
-                    ?>
-                        <div class="download-btn-row">
-                            <a class="download-btn" href="<?= $info['url'] ?>">Download</a>
-                            <div class="tooltip">
-                                <button class="download-btn" onclick="copyLink('<?= $info['url'] ?>')" onmouseout="outFunc()"><span class="tooltiptext" id="myTooltip">Copy to clipboard</span>Copy Link</button>
-                            </div>
-                            <!-- <form class="" action="./player" method="post"> -->
-                            <!-- <input type="hidden" name="src" value=""> -->
-                            <!-- <button type="submit" class="download-btn">Play Online</button> -->
-                            <!-- </form> -->
-                        </div>
-                        <span class="info-note"><b>Note: </b>In case of error, come back and re-click on download button.</span>
-                    <?php
-                    } else {
-                    ?>
-                        <br>
-                        <h2 class="info meta">Movie Coming Soon</h2>
-                    <?php
-                    }
-                    ?>
+                    <!-- rm b -->
                 </div>
 
             </div>
-            <?php
-            if (isset($info['url'])) {
-            ?>
-                <br>
-                <br>
-                <div class="video-container">
-                    <video id="my-video" class="video-js vjs-fluid" controls preload="auto" width="100%" height="100%" data-setup="{}">
-                        <source src="<?= $info['url']; ?>" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
-                </div>
-            <?php
-            }
-            ?>
+            <!-- rm p -->
         </div>
         <br>
         <div class="small-container">
