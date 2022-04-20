@@ -5,6 +5,7 @@ require_once('./includes/ui/RenderUI.php');
 
 $type = null;
 $value = null;
+
 if (isset($_GET['category']) && strlen($_GET['category']) > 0) {
     $value = $_GET['category'];
     $type = 'category';
