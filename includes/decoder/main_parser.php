@@ -76,7 +76,7 @@ function getDocumentInfo(string $uri): ?array
     for ($i = 2; $i < sizeof($infos); $i++) {
         $info = html_entity_decode($infos[$i]->plaintext);
 
-        if (strpos($info, 'Download Link') == true) {
+        if (strpos($info, 'Download Link') == false) {
             continue;
         }
 
