@@ -77,6 +77,7 @@ function getDocumentInfo(string $uri): ?array
         $info = html_entity_decode($infos[$i]->plaintext);
 
         if (strpos($info, 'Download Link') == true) {
+            $infoFetched = true;
             continue;
         }
 
