@@ -80,8 +80,9 @@ function getDocumentInfo(string $uri): ?array
             $result['info'][] = $info;
             continue;
         }
+        
 
-        if (endsWith($info, ':') !== false) {
+        if (endsWith($info, 'view:') !== false) {
             $infoFetched = true;
             continue;
         }

@@ -198,7 +198,7 @@ $BASE_URL = getBaseUrl();
                 </div>
                 <div>
                     <h1 class="info title"><?= $info['name'] ?></h1>
-                    <h3 class="info meta"><?= $info['year'] . ' • ' . $info['audio'] . ' • ' . $info['quality'] . ' • ' . $info['size'] ?></h3>
+                    <h3 class="info meta"><?= $info['year'] . ' • ' . $info['audio'] /* . ' • ' . $info['quality'] . ' • ' . $info['size'] */ ?></h3>
                     <h3 class="info genres"><?= $info['genres'] ?></h3>
                     <div class="info actors"><b>Actors:</b> <?= $info['actors'] ?></div>
                     <!-- rm b -->
